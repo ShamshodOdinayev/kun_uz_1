@@ -19,7 +19,6 @@ public class AuthService {
     public ProfileDTO auth(AuthDTO profile) { // login
         Optional<ProfileEntity> optional = profileRepository.findByEmailAndPassword(profile.getEmail(),
                 MD5Util.encode(profile.getPassword()));
-
         if (optional.isEmpty()) {
             throw new AppBadException("Email or Password is wrong");
         }

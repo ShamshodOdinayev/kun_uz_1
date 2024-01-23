@@ -1,0 +1,30 @@
+### Cretae ArticleType
+POST localhost:8080/articleType
+Content-Type: application/json
+
+{
+  "orderNumber": 2,
+  "nameUz": "JAHON",
+  "nameRu": "МИР",
+  "nameEn": "YEAH"
+}
+
+### ArticleType update by id
+POST localhost:8080/articleType/1
+Content-Type: application/json
+
+{
+  "orderNumber": 1,
+  "nameUz": "O'zbekiston",
+  "nameRu": "УЗБЕКИСТАН",
+  "nameEn": "Uzbekistan"
+}
+
+### ArticleType delete
+DELETE localhost:8080/articleType/4
+
+### Get all
+GET localhost:8080/articleType
+
+### Get by lang
+GET localhost:8080/articleType/lang?lang=uz
