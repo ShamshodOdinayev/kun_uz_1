@@ -2,7 +2,7 @@ package com.example.service;
 
 import com.example.dto.ArticleTypeCrudeDTO;
 import com.example.dto.ArticleTypeDTO;
-import com.example.dto.ArticleTypeGetByLangDTO;
+import com.example.dto.GetByLangDTO;
 import com.example.entity.ArticleTypeEntity;
 import com.example.exp.AppBadException;
 import com.example.repository.ArticleTypeRepository;
@@ -57,7 +57,7 @@ public class ArticleTypeService {
         return dtoList;
     }
 
-    public List<ArticleTypeGetByLangDTO> getByLang(String lang) {
+    public List<GetByLangDTO> getByLang(String lang) {
         return switch (lang) {
             case "uz", "en", "ru" -> getArticleTypeGetByLangDTOS(lang);
             default -> throw new AppBadException("Language not found(en,uz,ru)");
@@ -91,11 +91,14 @@ public class ArticleTypeService {
         return entity;
     }
 
-    private List<ArticleTypeGetByLangDTO> getArticleTypeGetByLangDTOS(String lang) {
+    private List<GetByLangDTO> getArticleTypeGetByLangDTOS(String lang) {
         List<ArticleTypeDTO> articleTypeDTOS = getAll();
-        List<ArticleTypeGetByLangDTO> dtoList = new LinkedList<>();
+        List<GetByLangDTO> dtoList = new LinkedList<>();
         for (ArticleTypeDTO articleTypeDTO : articleTypeDTOS) {
-            ArticleTypeGetByLangDTO dto = new ArticleTypeGetByLangDTO();
+            if (!articleTypeDTO.getVisible()) {
+                continue;
+            }
+            GetByLangDTO dto = new GetByLangDTO();
             dto.setId(articleTypeDTO.getId());
             switch (lang) {
                 case "uz" -> dto.setName(articleTypeDTO.getNameUz());

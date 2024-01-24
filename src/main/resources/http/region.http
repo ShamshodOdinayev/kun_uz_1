@@ -1,0 +1,30 @@
+### Create region
+POST localhost:8080/region
+Content-Type: application/json
+
+{
+  "orderNumber": 2,
+  "nameUz": "Qoraqalpog'iston",
+  "nameEn": "Karakalpakstan",
+  "nameRu": "Қорақалпоғистан"
+}
+
+### Update By id
+POST localhost:8080/region/2
+Content-Type: application/json
+
+{
+  "orderNumber": 3,
+  "nameUz": "Andijon",
+  "nameEn": "Andijan",
+  "nameRu": "Андижан"
+}
+
+### Delete by id Region
+DELETE localhost:8080/region/5
+
+### Get all Region
+GET localhost:8080/region
+
+### Get by lang
+GET localhost:8080/region/lang?lang=ru

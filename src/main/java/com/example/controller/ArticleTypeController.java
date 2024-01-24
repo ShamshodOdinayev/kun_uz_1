@@ -2,7 +2,7 @@ package com.example.controller;
 
 import com.example.dto.ArticleTypeCrudeDTO;
 import com.example.dto.ArticleTypeDTO;
-import com.example.dto.ArticleTypeGetByLangDTO;
+import com.example.dto.GetByLangDTO;
 import com.example.service.ArticleTypeService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -40,7 +40,7 @@ public class ArticleTypeController {
     }
 
     @GetMapping("/lang")
-    public ResponseEntity<List<ArticleTypeGetByLangDTO>> getByLang(@RequestParam(value = "lang", defaultValue = "en") String lang) {
+    public ResponseEntity<List<GetByLangDTO>> getByLang(@RequestParam(value = "lang", defaultValue = "en") String lang) {
         return ResponseEntity.ok(articleTypeService.getByLang(lang));
     }
 }
