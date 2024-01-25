@@ -27,4 +27,4 @@ DELETE localhost:8080/articleType/4
 GET localhost:8080/articleType
 
 ### Get by lang
-GET localhost:8080/articleType/lang?lang=uz
+GET localhost:8080/articleType/lang?lang=ru

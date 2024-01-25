@@ -4,6 +4,7 @@ import com.example.dto.ArticleTypeCrudeDTO;
 import com.example.dto.ArticleTypeDTO;
 import com.example.dto.GetByLangDTO;
 import com.example.entity.ArticleTypeEntity;
+import com.example.enums.AppLanguage;
 import com.example.exp.AppBadException;
 import com.example.repository.ArticleTypeRepository;
 import org.springframework.stereotype.Service;
@@ -57,11 +58,23 @@ public class ArticleTypeService {
         return dtoList;
     }
 
-    public List<GetByLangDTO> getByLang(String lang) {
-        return switch (lang) {
-            case "uz", "en", "ru" -> getArticleTypeGetByLangDTOS(lang);
-            default -> throw new AppBadException("Language not found(en,uz,ru)");
-        };
+    public List<GetByLangDTO> getByLang(AppLanguage lang) {
+        List<ArticleTypeDTO> articleTypeDTOS = getAll();
+        List<GetByLangDTO> dtoList = new LinkedList<>();
+        for (ArticleTypeDTO articleTypeDTO : articleTypeDTOS) {
+            if (!articleTypeDTO.getVisible()) {
+                continue;
+            }
+            GetByLangDTO dto = new GetByLangDTO();
+            dto.setId(articleTypeDTO.getId());
+            switch (lang) {
+                case uz -> dto.setName(articleTypeDTO.getNameUz());
+                case ru -> dto.setName(articleTypeDTO.getNameRu());
+                default -> dto.setName(articleTypeDTO.getNameEn());
+            }
+            dtoList.add(dto);
+        }
+        return dtoList;
     }
 
     private ArticleTypeEntity checkByIdEntity(Integer id) {
@@ -91,22 +104,4 @@ public class ArticleTypeService {
         return entity;
     }
 
-    private List<GetByLangDTO> getArticleTypeGetByLangDTOS(String lang) {
-        List<ArticleTypeDTO> articleTypeDTOS = getAll();
-        List<GetByLangDTO> dtoList = new LinkedList<>();
-        for (ArticleTypeDTO articleTypeDTO : articleTypeDTOS) {
-            if (!articleTypeDTO.getVisible()) {
-                continue;
-            }
-            GetByLangDTO dto = new GetByLangDTO();
-            dto.setId(articleTypeDTO.getId());
-            switch (lang) {
-                case "uz" -> dto.setName(articleTypeDTO.getNameUz());
-                case "ru" -> dto.setName(articleTypeDTO.getNameRu());
-                case "en" -> dto.setName(articleTypeDTO.getNameEn());
-            }
-            dtoList.add(dto);
-        }
-        return dtoList;
-    }
 }

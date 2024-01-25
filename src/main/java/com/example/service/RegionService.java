@@ -3,6 +3,7 @@ package com.example.service;
 import com.example.dto.RegionDTO;
 import com.example.dto.GetByLangDTO;
 import com.example.entity.RegionEntity;
+import com.example.enums.AppLanguage;
 import com.example.exp.AppBadException;
 import com.example.repository.RegionRepository;
 import org.springframework.stereotype.Service;
@@ -40,9 +41,8 @@ public class RegionService {
     }
 
     public Boolean deleteById(Integer id) {
-        regionRepository.delete(checkByIdEntity(id));
-        /* TODO
-         *   visible false qilish kk*/
+        checkByIdEntity(id);
+        regionRepository.deleteById(id);
         return true;
     }
 
@@ -92,14 +92,7 @@ public class RegionService {
         return entity;
     }
 
-    public List<GetByLangDTO> getByLang(String lang) {
-        return switch (lang) {
-            case "uz", "en", "ru" -> getRegionGetByLangDTOS(lang);
-            default -> throw new AppBadException("Language not found(en,uz,ru)");
-        };
-    }
-
-    private List<GetByLangDTO> getRegionGetByLangDTOS(String lang) {
+    public List<GetByLangDTO> getByLang(AppLanguage lang) {
         List<RegionDTO> regionDTOS = getAll();
         List<GetByLangDTO> dtoList = new LinkedList<>();
         for (RegionDTO regionDTO : regionDTOS) {
@@ -109,9 +102,9 @@ public class RegionService {
             GetByLangDTO dto = new GetByLangDTO();
             dto.setId(regionDTO.getId());
             switch (lang) {
-                case "uz" -> dto.setName(regionDTO.getNameUz());
-                case "ru" -> dto.setName(regionDTO.getNameRu());
-                case "en" -> dto.setName(regionDTO.getNameEn());
+                case uz -> dto.setName(regionDTO.getNameUz());
+                case ru -> dto.setName(regionDTO.getNameRu());
+                default -> dto.setName(regionDTO.getNameEn());
             }
             dtoList.add(dto);
         }

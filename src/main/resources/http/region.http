@@ -27,4 +27,4 @@ DELETE localhost:8080/region/5
 GET localhost:8080/region
 
 ### Get by lang
-GET localhost:8080/region/lang?lang=ru
+GET localhost:8080/region/lang?lang=uz
