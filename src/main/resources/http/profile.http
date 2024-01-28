@@ -4,18 +4,18 @@ Content-Type: application/json
 Authorization: eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MDYxOTI4NDMsImlkIjoxLCJyb2xlIjoiQURNSU4iLCJleHAiOjE3MDYyNzkyNDMsImlzcyI6Ikt1blV6VGVzdCJ9.VfhFvv7UH8t8wTQt-xewB69uYGgdG_RgGCjleH9JvCNscLbGb4vfFyV5DkwMXnJ7ARRv5AC1KsRtFS0zVaWnfQ
 
 {
-  "name": "Ali",
-  "surName": "Aliyev",
-  "password": "AS12345678sef",
-  "email": "sdsddfsd@mail.rusd",
+  "name": "Shamshod",
+  "surName": "Odinayev",
+  "password": "Shamshod123",
+  "email": "sho1d@mail.rusd",
   "role": "USER",
   "status": "ACTIVE"
 }
 
 ### Update profile
-POST localhost:8080/profile/2
+POST localhost:8080/profile/10
 Content-Type: application/json
-Authorization: eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MDYxOTI4NDMsImlkIjoxLCJyb2xlIjoiQURNSU4iLCJleHAiOjE3MDYyNzkyNDMsImlzcyI6Ikt1blV6VGVzdCJ9.VfhFvv7UH8t8wTQt-xewB69uYGgdG_RgGCjleH9JvCNscLbGb4vfFyV5DkwMXnJ7ARRv5AC1KsRtFS0zVaWnfQ
+Authorization: eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MDYyNjAzNDMsImlkIjoxMSwicm9sZSI6IlVTRVIiLCJleHAiOjE3MDYzNDY3NDMsImlzcyI6Ikt1blV6VGVzdCJ9.gjQ3HdCIRXunKWMyC3n4sJF0QPTB7jw21MiPUSF6A4RANG2K1NboXYMBKB6vkkvIL2gdFKbxAhMZDtJ5o4vJoQ
 
 {
   "role": "USER",
@@ -24,7 +24,7 @@ Authorization: eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MDYxOTI4NDMsImlkIjoxLCJyb2xlIjoi
 
 ### Profile get all
 GET localhost:8080/profile
-Authorization: eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MDYxOTI4NDMsImlkIjoxLCJyb2xlIjoiQURNSU4iLCJleHAiOjE3MDYyNzkyNDMsImlzcyI6Ikt1blV6VGVzdCJ9.VfhFvv7UH8t8wTQt-xewB69uYGgdG_RgGCjleH9JvCNscLbGb4vfFyV5DkwMXnJ7ARRv5AC1KsRtFS0zVaWnfQ
+Authorization: eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MDYyODAzMzcsImlkIjoxLCJyb2xlIjoiQURNSU4iLCJleHAiOjE3MDYzNjY3MzcsImlzcyI6Ikt1blV6VGVzdCJ9.qpE4c78kKM7muaQkLlqSfH6zajdkdFHyeqqCHytqUF8RoMjXjwah-oWhUpk9FgDU0uGIr71IujgOVWg8z-yspQ
 
 ### Profile Delete
 DELETE localhost:8080/profile/7

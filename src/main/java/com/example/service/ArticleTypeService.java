@@ -59,12 +59,9 @@ public class ArticleTypeService {
     }
 
     public List<GetByLangDTO> getByLang(AppLanguage lang) {
-        List<ArticleTypeDTO> articleTypeDTOS = getAll();
+        List<ArticleTypeDTO> articleTypeDTOS =articleTypeRepository.findAllByVisible(true);
         List<GetByLangDTO> dtoList = new LinkedList<>();
         for (ArticleTypeDTO articleTypeDTO : articleTypeDTOS) {
-            if (!articleTypeDTO.getVisible()) {
-                continue;
-            }
             GetByLangDTO dto = new GetByLangDTO();
             dto.setId(articleTypeDTO.getId());
             switch (lang) {

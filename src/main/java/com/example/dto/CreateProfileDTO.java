@@ -14,4 +14,5 @@ public class CreateProfileDTO {
     private String password;
     private ProfileStatus status;
     private ProfileRole role;
+    private String jwt;
 }

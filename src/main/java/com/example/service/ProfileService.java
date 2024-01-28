@@ -1,10 +1,12 @@
 package com.example.service;
 
 import com.example.dto.CreateProfileDTO;
+import com.example.dto.JwtDTO;
 import com.example.dto.ProfileDTO;
 import com.example.entity.ProfileEntity;
 import com.example.exp.AppBadException;
 import com.example.repository.ProfileRepository;
+import com.example.util.JWTUtil;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -50,6 +52,7 @@ public class ProfileService {
         profileDTO.setStatus(entity.getStatus());
         profileDTO.setCreatedDate(entity.getCreatedDate());
         profileDTO.setVisible(entity.getVisible());
+        profileDTO.setJwt(JWTUtil.encode(entity.getId(), entity.getRole()));
         return profileDTO;
     }
 
@@ -74,11 +77,17 @@ public class ProfileService {
     }
 
     public ProfileDTO update(CreateProfileDTO dto, Integer id) {
-        Optional<ProfileEntity> entityOptional = profileRepository.findById(id);
-        if (entityOptional.isEmpty()) {
-            throw new AppBadException("No user found with this id");
-        }
-        ProfileEntity entity = entityOptional.get();
+        ProfileEntity entity = get(id);
+        return entityUpdate(dto, entity);
+    }
+
+    public ProfileDTO update(CreateProfileDTO dto, String jwt) {
+        JwtDTO jwtDTO = JWTUtil.decode(jwt);
+        ProfileEntity entity = get(jwtDTO.getId());
+        return entityUpdate(dto, entity);
+    }
+
+    private ProfileDTO entityUpdate(CreateProfileDTO dto, ProfileEntity entity) {
         entity.setName(dto.getName() == null ? entity.getName() : dto.getName());
         entity.setSurname(dto.getSurName() == null ? entity.getSurname() : dto.getSurName());
         entity.setEmail(dto.getEmail() == null ? entity.getEmail() : dto.getEmail());
@@ -106,5 +115,13 @@ public class ProfileService {
         }
         profileRepository.deleteByIdQuery(id);
         return true;
+    }
+
+    private ProfileEntity get(Integer id) {
+        Optional<ProfileEntity> entityOptional = profileRepository.findById(id);
+        if (entityOptional.isEmpty()) {
+            throw new AppBadException("Profile not found");
+        }
+        return entityOptional.get();
     }
 }

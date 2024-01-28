@@ -1,0 +1,32 @@
+### Create category
+POST localhost:8080/category/adm
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MDY0Mjc1NTIsImlkIjoxLCJyb2xlIjoiQURNSU4iLCJleHAiOjE3MDY1MTM5NTIsImlzcyI6Ikt1blV6VGVzdCJ9.YZu4TbS0vWt4r4mifz4T1FUxwkG-SthYfuXn6gOXlE5S8bBN6eys0-8jQxb_ToxJKg8a4XIcI6XKaeWso4ivHA
+
+{
+  "orderNumber": 1,
+  "nameRu": "ru",
+  "nameEn": "en",
+  "nameUz": "uz"
+}
+
+### Update by id
+PUT localhost:8080/category/1
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MDYzNjQ2NjQsImlkIjoxLCJyb2xlIjoiQURNSU4iLCJleHAiOjE3MDY0NTEwNjQsImlzcyI6Ikt1blV6VGVzdCJ9.Tuv7KuQ150uMY1hmCNxzbm8zNYVVoXS2hXRie-L_Kt9cd1wqKc4JDE_yd7kMZBHtS4iAjY9sQu09bzGUdS8tIg
+
+{
+  "nameUz": "UZ"
+}
+
+### Delete by id
+DELETE localhost:8080/category/2
+Authorization: eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MDYzNjQ2NjQsImlkIjoxLCJyb2xlIjoiQURNSU4iLCJleHAiOjE3MDY0NTEwNjQsImlzcyI6Ikt1blV6VGVzdCJ9.Tuv7KuQ150uMY1hmCNxzbm8zNYVVoXS2hXRie-L_Kt9cd1wqKc4JDE_yd7kMZBHtS4iAjY9sQu09bzGUdS8tIg
+
+### Get all
+GET localhost:8080/category
+Authorization: eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MDYzNjQ2NjQsImlkIjoxLCJyb2xlIjoiQURNSU4iLCJleHAiOjE3MDY0NTEwNjQsImlzcyI6Ikt1blV6VGVzdCJ9.Tuv7KuQ150uMY1hmCNxzbm8zNYVVoXS2hXRie-L_Kt9cd1wqKc4JDE_yd7kMZBHtS4iAjY9sQu09bzGUdS8tIg
+
+### Get by lang
+GET localhost:8080/category/lang
+Authorization: eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MDYzNjQ2NjQsImlkIjoxLCJyb2xlIjoiQURNSU4iLCJleHAiOjE3MDY0NTEwNjQsImlzcyI6Ikt1blV6VGVzdCJ9.Tuv7KuQ150uMY1hmCNxzbm8zNYVVoXS2hXRie-L_Kt9cd1wqKc4JDE_yd7kMZBHtS4iAjY9sQu09bzGUdS8tIg
