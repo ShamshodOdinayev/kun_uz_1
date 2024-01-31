@@ -2,6 +2,7 @@ package com.example.service;
 
 import com.example.dto.EmailSendHistoryDTO;
 import com.example.entity.EmailSendHistoryEntity;
+import com.example.entity.ProfileEntity;
 import com.example.repository.EmailSendHistoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,7 +18,7 @@ public class EmailSendHistoryService {
     @Autowired
     private EmailSendHistoryRepository emailSendHistoryRepository;
 
-    public void saveHistory(String message, String email) {
+    public void saveHistory(String message, String email, ProfileEntity profileEntity) {
         EmailSendHistoryEntity entity = new EmailSendHistoryEntity();
         entity.setEmail(email);
         entity.setMessage(message);

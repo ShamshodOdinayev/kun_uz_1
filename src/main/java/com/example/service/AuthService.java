@@ -9,13 +9,16 @@ import com.example.entity.ProfileEntity;
 import com.example.enums.ProfileRole;
 import com.example.enums.ProfileStatus;
 import com.example.exp.AppBadException;
+import com.example.repository.EmailSendHistoryRepository;
 import com.example.repository.ProfileRepository;
 import com.example.util.JWTUtil;
 import com.example.util.MD5Util;
+import com.example.util.RandomUtil;
 import io.jsonwebtoken.JwtException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -24,12 +27,16 @@ import java.util.regex.Pattern;
 public class AuthService {
     private final ProfileRepository profileRepository;
     private final MailSenderService mailSenderService;
+    private final EmailSendHistoryRepository emailSendHistoryRepository;
     private final EmailSendHistoryService emailSendHistoryService;
+    private final SmsServerService smsServerService;
 
-    public AuthService(ProfileRepository profileRepository, MailSenderService mailSenderService, EmailSendHistoryService emailSendHistoryService) {
+    public AuthService(ProfileRepository profileRepository, MailSenderService mailSenderService, EmailSendHistoryService emailSendHistoryService, EmailSendHistoryRepository emailSendHistoryRepository, SmsServerService smsServerService) {
         this.profileRepository = profileRepository;
         this.mailSenderService = mailSenderService;
         this.emailSendHistoryService = emailSendHistoryService;
+        this.emailSendHistoryRepository = emailSendHistoryRepository;
+        this.smsServerService = smsServerService;
     }
 
     public ProfileDTO auth(AuthDTO profile) { // login
@@ -51,6 +58,11 @@ public class AuthService {
     }
 
     public String registration(RegistrationDTO dto) {
+        LocalDateTime from = LocalDateTime.now().minusMinutes(1);
+        LocalDateTime to = LocalDateTime.now();
+        if (emailSendHistoryRepository.countSendEmail(dto.getEmail(), from, to) >= 3) {
+            throw new AppBadException("To many attempt. Please try after 1 minute.");
+        }
         checkEmail(dto);
         isValidPassword(dto.getPassword());
         isValidEmail(dto.getEmail());
@@ -62,12 +74,36 @@ public class AuthService {
         entity.setStatus(ProfileStatus.REGISTRATION);
         entity.setEmail(dto.getEmail());
         profileRepository.save(entity);
-        String jwt = JWTUtil.encodeForEmail(entity.getId());
-        String message = "Hello. \n To complete registration please link to the following link\n"
-                + "http://localhost:8080/auth/verification/email/" + jwt;
-        emailSendHistoryService.saveHistory(message, dto.getEmail());
-        mailSenderService.sendEmail(dto.getEmail(), "Registration", message);
+
+        /**
+         * sms yuborish
+         **/
+        String code = RandomUtil.getRandomSmsCode();
+        smsServerService.send(dto.getPhone(), "KunuzTest verification code: ", code);
+
+        /**
+         * emailga xabar yuborish
+         **/
+//        String jwt = JWTUtil.encodeForEmail(entity.getId());
+//        String message = getMessage(entity, jwt);
+//        emailSendHistoryService.saveHistory(message, dto.getEmail(), entity);
+//        mailSenderService.sendEmail(dto.getEmail(), "Registration", message);
         return "A code has been sent to the user's email";
+    }
+
+    private static String getMessage(ProfileEntity entity, String jwt) {
+        String message = "<h1 style=\"text-align: center\">Hello %s</h1>\n" +
+                "<p style=\"background-color: indianred; color: white; padding: 30px\">To complete registration please link to the following link</p>\n" +
+                "<a style=\" background-color: #f44336;\n" +
+                "  color: white;\n" +
+                "  padding: 14px 25px;\n" +
+                "  text-align: center;\n" +
+                "  text-decoration: none;\n" +
+                "  display: inline-block;\" href=\"http://localhost:8080/auth/verification/email/%s\n" +
+                "\">Click</a>\n" +
+                "<br>\n";
+        message = String.format(message, entity.getName(), jwt);
+        return message;
     }
 
     public String emailVerification(String jwt) {
