@@ -13,21 +13,18 @@ import lombok.Setter;
 public class ProfileEntity extends BaseEntity {
     @Column(name = "name", nullable = false)
     private String name;
-
     @Column(name = "surname", nullable = false)
     private String surname;
-
     @Column(name = "email", nullable = false, unique = true)
     private String email;
-
     @Column(name = "password", nullable = false)
     private String password;
-
     @Enumerated(EnumType.STRING)
     @Column(name = "status", nullable = false)
     private ProfileStatus status;
-
     @Enumerated(EnumType.STRING)
     @Column(name = "role", nullable = false)
     private ProfileRole role;
+    @Column(name = "sms_code")
+    private String smsCode;
 }

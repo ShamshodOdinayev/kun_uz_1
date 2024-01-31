@@ -1,0 +1,7 @@
+### Get by email
+GET localhost:8080/emailHistory/adm/email/shamshod6696odinayev@gmail.com
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MDY2MjU4ODQsImlkIjoxLCJyb2xlIjoiQURNSU4iLCJleHAiOjE3MDY3MTIyODQsImlzcyI6Ikt1blV6VGVzdCJ9.MbuaTR_ncJ_n8aQf9_H_pn9zjLM6niZjEiB880OlXSWBxO7Ge64kMJL2cMA7V0-_8S5zDnkMViXDOgcKh7ZnYA
+
+### Get given date
+GET localhost:8080/emailHistory/adm/date/2024-01-30
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MDY2MjU1MzEsImlkIjoxLCJyb2xlIjoiQURNSU4iLCJleHAiOjE3MDY3MTE5MzEsImlzcyI6Ikt1blV6VGVzdCJ9.9R0cl6dNJZTz1jQbv5UHXj0BW3tdjDh8VEEz7Z6HWpmbP8rpuWm-ipiwZaFsHjZKu-PCfW3AJ2BEgTntkO9_Xg

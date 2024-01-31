@@ -10,8 +10,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-import static com.example.enums.AppLanguage.en;
-
 @RestController
 @RequestMapping("/articleType")
 public class ArticleTypeController {

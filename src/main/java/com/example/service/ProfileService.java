@@ -1,14 +1,17 @@
 package com.example.service;
 
-import com.example.dto.CreateProfileDTO;
-import com.example.dto.JwtDTO;
-import com.example.dto.ProfileDTO;
+import com.example.dto.*;
 import com.example.entity.ProfileEntity;
 import com.example.exp.AppBadException;
+import com.example.repository.ProfileCustomRepository;
 import com.example.repository.ProfileRepository;
 import com.example.util.JWTUtil;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.awt.event.PaintEvent;
 import java.time.LocalDateTime;
 import java.util.LinkedList;
 import java.util.List;
@@ -19,9 +22,11 @@ import java.util.regex.Pattern;
 @Service
 public class ProfileService {
     private final ProfileRepository profileRepository;
+    private final ProfileCustomRepository profileCustomRepository;
 
-    public ProfileService(ProfileRepository profileRepository) {
+    public ProfileService(ProfileRepository profileRepository, ProfileCustomRepository profileCustomRepository) {
         this.profileRepository = profileRepository;
+        this.profileCustomRepository = profileCustomRepository;
     }
 
     public ProfileDTO create(CreateProfileDTO dto) {
@@ -123,5 +128,16 @@ public class ProfileService {
             throw new AppBadException("Profile not found");
         }
         return entityOptional.get();
+    }
+
+    public PageImpl<ProfileDTO> filter(ProfileFilterDTO dto, Integer page, Integer size) {
+        PaginationResultDTO<ProfileEntity> paginationResultDTO = profileCustomRepository.filter(dto, page, size);
+        List<ProfileEntity> profileEntityList = paginationResultDTO.getList();
+        List<ProfileDTO> dtoList = new LinkedList<>();
+        for (ProfileEntity entity : profileEntityList) {
+            dtoList.add(toDTO(entity));
+        }
+        Pageable pageable = PageRequest.of(page, size);
+        return new PageImpl<>(dtoList, pageable, paginationResultDTO.getTotalSize());
     }
 }

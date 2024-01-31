@@ -16,9 +16,12 @@ public class SecuredFilterConfig {
     public FilterRegistrationBean<Filter> filterRegistrationBean() {
         FilterRegistrationBean<Filter> bean = new FilterRegistrationBean<>();
         bean.setFilter(tokenFilter);
-        bean.addUrlPatterns("/category/adm");
-        bean.addUrlPatterns("/region/adm/*");
-        bean.addUrlPatterns("/region/adm/**");
+        bean.addUrlPatterns("/profile/adm");
+        bean.addUrlPatterns("/emailHistory/adm");
+        bean.addUrlPatterns("/profile/adm/*");
+        bean.addUrlPatterns("/emailHistory/adm/*");
+        bean.addUrlPatterns("/profile/adm/**");
+        bean.addUrlPatterns("/emailHistory/adm/**");
         return bean;
     }
 }

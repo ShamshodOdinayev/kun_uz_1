@@ -14,4 +14,8 @@ public class JwtDTO {
         this.id = id;
         this.role = role;
     }
+
+    public JwtDTO(Integer id) {
+        this.id = id;
+    }
 }
