@@ -1,0 +1,14 @@
+### Upload file
+POST http://localhost:8080/attach/upload
+Content-Type: multipart/form-data; boundary=WebAppBoundary
+
+--WebAppBoundary
+Content-Disposition: form-data; name="file"; filename="kunuz.jpg"
+
+< C:\Users\Shamshod Odinayev\Desktop\Новая папка\photo_2024-02-02_19-35-01.jpg
+
+### GET
+GET localhost:8080/attach/open/kunuz.jpg
+
+### Get all
+GET localhost:8080/attach/open_general/kunuz.jpg
