@@ -18,10 +18,22 @@ public class SecuredFilterConfig {
         bean.setFilter(tokenFilter);
         bean.addUrlPatterns("/profile/adm");
         bean.addUrlPatterns("/emailHistory/adm");
+        bean.addUrlPatterns("/article/adm");
+        bean.addUrlPatterns("/category/adm");
+        bean.addUrlPatterns("/region/adm");
+
         bean.addUrlPatterns("/profile/adm/*");
         bean.addUrlPatterns("/emailHistory/adm/*");
+        bean.addUrlPatterns("/article/adm/*");
+        bean.addUrlPatterns("/category/adm/*");
+        bean.addUrlPatterns("/region/adm/*");
+
         bean.addUrlPatterns("/profile/adm/**");
         bean.addUrlPatterns("/emailHistory/adm/**");
+        bean.addUrlPatterns("/article/adm/**");
+        bean.addUrlPatterns("/category/adm/**");
+        bean.addUrlPatterns("/region/adm/**");
+
         return bean;
     }
 }

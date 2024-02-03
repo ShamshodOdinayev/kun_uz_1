@@ -1,7 +1,7 @@
 ### Create category
 POST localhost:8080/category/adm
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MDY0Mjc1NTIsImlkIjoxLCJyb2xlIjoiQURNSU4iLCJleHAiOjE3MDY1MTM5NTIsImlzcyI6Ikt1blV6VGVzdCJ9.YZu4TbS0vWt4r4mifz4T1FUxwkG-SthYfuXn6gOXlE5S8bBN6eys0-8jQxb_ToxJKg8a4XIcI6XKaeWso4ivHA
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MDY5NjkyOTEsImlkIjoxLCJyb2xlIjoiQURNSU4iLCJleHAiOjE3MDcwNTU2OTEsImlzcyI6Ikt1blV6VGVzdCJ9.vZc91r25wGuaRdu6qT0jFLI_92-j7KG0NIQXMXxp6JgJ07hv7PT5l0o-aDc0LRO6W8qGjOHlvzBQEGf6cm1zEg
 
 {
   "orderNumber": 1,

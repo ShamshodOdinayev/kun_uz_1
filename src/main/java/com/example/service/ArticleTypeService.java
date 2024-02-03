@@ -59,7 +59,7 @@ public class ArticleTypeService {
     }
 
     public List<GetByLangDTO> getByLang(AppLanguage lang) {
-        List<ArticleTypeDTO> articleTypeDTOS =articleTypeRepository.findAllByVisible(true);
+        List<ArticleTypeDTO> articleTypeDTOS = articleTypeRepository.findAllByVisible(true);
         List<GetByLangDTO> dtoList = new LinkedList<>();
         for (ArticleTypeDTO articleTypeDTO : articleTypeDTOS) {
             GetByLangDTO dto = new GetByLangDTO();
@@ -92,7 +92,7 @@ public class ArticleTypeService {
         return articleTypeDTO;
     }
 
-    private static ArticleTypeEntity dtoToEntity(ArticleTypeCrudeDTO dto) {
+    public ArticleTypeEntity dtoToEntity(ArticleTypeCrudeDTO dto) {
         ArticleTypeEntity entity = new ArticleTypeEntity();
         entity.setOrderNumber(dto.getOrderNumber());
         entity.setNameUz(dto.getNameUz());

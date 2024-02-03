@@ -1,8 +1,6 @@
 package com.example.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -19,5 +17,7 @@ public class ArticleTypeEntity extends BaseEntity {
     private String nameRu;
     @Column(name = "name_en")
     private String nameEn;
-
+    @ManyToOne
+    @JoinColumn(name = "article_id", nullable = false)
+    private ArticleEntity article;
 }
