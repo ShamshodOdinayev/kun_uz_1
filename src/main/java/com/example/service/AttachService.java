@@ -1,5 +1,8 @@
 package com.example.service;
 
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.UrlResource;
+import org.springframework.http.HttpHeaders;
 import com.example.dto.AttachDTO;
 import com.example.entity.AttachEntity;
 import com.example.exp.AppBadException;
@@ -11,11 +14,13 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.util.Calendar;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -141,5 +146,22 @@ public class AttachService {
     AttachEntity get(String id) {
         return attachRepository.findById(id).orElseThrow(() -> new AppBadException("File not found"));
     }
+
+    public Resource downloadFile(String fileId) {
+        AttachEntity entity = get(fileId);
+        String path = entity.getPath();
+        String extension = entity.getExtension();
+        String id = entity.getId();
+        String uploadDir = "./uploads/"; // filelar saqlangan folder
+        Path filePath = Paths.get(uploadDir + path + "/" + id + "." + extension).normalize();
+        Resource resource;
+        try {
+            resource = new UrlResource(filePath.toUri());
+        } catch (MalformedURLException e) {
+            throw new AppBadException("File not found");
+        }
+        return resource;
+    }
+
 
 }

@@ -5,10 +5,15 @@ Content-Type: multipart/form-data; boundary=WebAppBoundary
 --WebAppBoundary
 Content-Disposition: form-data; name="file"; filename="kunuz.jpg"
 
-< C:\Users\Shamshod Odinayev\Desktop\Новая папка\photo_2024-02-02_19-35-01.jpg
+< C:\Users\Shamshod Odinayev\Desktop\rasm\rasm3.png
 
 ### GET
 GET localhost:8080/attach/open/kunuz.jpg
 
 ### Get all
 GET localhost:8080/attach/open_general/kunuz.jpg
+
+### Dowlooad
+GET localhost:8080/attach/download/60cbabd5-c103-4ec4-9b8a-96eba5f1d620
+
+

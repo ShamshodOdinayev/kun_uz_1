@@ -36,7 +36,7 @@ public class ArticleService {
         entity.setTitle(dto.getTitle());
         entity.setDescription(dto.getDescription());
         entity.setContent(dto.getContent());
-        entity.setImageId(dto.getImageId());
+        entity.setImagesId(dto.getImageId());
         Optional<RegionEntity> regionEntity = regionRepository.findById(dto.getRegionId());
         if (regionEntity.isEmpty()) {
             throw new AppBadException("Region not found");
@@ -48,11 +48,6 @@ public class ArticleService {
         }
         entity.setCategory(categoryEntity.get());
         List<ArticleTypeCrudeDTO> articleTypeCrudeDTOList = dto.getArticleType();
-        List<ArticleTypeEntity> typeList = new LinkedList<>();
-        for (ArticleTypeCrudeDTO articleTypeCrudeDTO : articleTypeCrudeDTOList) {
-            typeList.add(articleTypeService.dtoToEntity(articleTypeCrudeDTO));
-        }
-        entity.setType(typeList);
         entity.setStatus(ArticleStatus.NOT_PUBLISHED);
         Optional<ProfileEntity> profileEntityOptional = profileRepository.findById(profileId);
         if (profileEntityOptional.isEmpty()) {
@@ -71,9 +66,8 @@ public class ArticleService {
         dto.setModerator(entity.getModerator());
         dto.setRegion(entity.getRegion());
         dto.setContent(entity.getContent());
-        dto.setImageId(entity.getImageId());
+        dto.setImageId(entity.getImagesId());
         dto.setStatus(entity.getStatus());
-        dto.setType(entity.getType());
         dto.setPublishedDate(entity.getPublishedDate());
         dto.setPublisher(entity.getPublisher());
         dto.setViewCount(entity.getViewCount());
@@ -87,11 +81,10 @@ public class ArticleService {
             throw new AppBadException("article not found");
         }
         ArticleEntity entity = entityOptional.get();
-
         entity.setTitle(check(dto.getTitle()) ? dto.getTitle() : entity.getTitle());
         entity.setDescription(check(dto.getDescription()) ? dto.getDescription() : entity.getDescription());
         entity.setContent(check(dto.getContent()) ? dto.getContent() : entity.getContent());
-        entity.setImageId(check(dto.getImageId()) ? dto.getImageId() : entity.getImageId());
+        entity.setImagesId(check(dto.getImageId()) ? dto.getImageId() : entity.getImagesId());
         Optional<RegionEntity> regionEntity = regionRepository.findById(check(dto.getRegionId()) ? dto.getRegionId() : entity.getRegion().getId());
         if (regionEntity.isEmpty()) {
             throw new AppBadException("Region not found");
@@ -102,14 +95,6 @@ public class ArticleService {
             throw new AppBadException("Category not found");
         }
         entity.setCategory(categoryEntity.get());
-        List<ArticleTypeCrudeDTO> articleTypeCrudeDTOList = check(dto.getArticleType()) ? dto.getArticleType() : null;
-        List<ArticleTypeEntity> typeList = new LinkedList<>();
-        if (articleTypeCrudeDTOList != null) {
-            for (ArticleTypeCrudeDTO articleTypeCrudeDTO : articleTypeCrudeDTOList) {
-                typeList.add(articleTypeService.dtoToEntity(articleTypeCrudeDTO));
-            }
-            entity.setType(typeList);
-        }
         articleRepository.save(entity);
         return toDTO(entity);
     }

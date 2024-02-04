@@ -38,6 +38,10 @@ public class ArticleController {
                                                                     @RequestParam(value = "size",defaultValue = "3") Integer size){
         return ResponseEntity.ok(articleService.getLastArticleByType(typeId, size));
     }
+    @GetMapping("")
+    public ResponseEntity<ArticleShortInfoDTO> getByIdAndLang(){
+        return null;
+    }
 
 
 }
