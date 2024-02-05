@@ -21,15 +21,14 @@ public class ArticleDTO {
     private String description;
     private String content;
     private Integer sharedCount;
-    private String imageId;
-    private RegionEntity region;
-    private CategoryEntity category;
-    private ProfileEntity moderator;
-    private ProfileEntity publisher;
-    private ArticleStatus status;
+    private String imagesId;
     private LocalDateTime createdDate;
     private LocalDateTime publishedDate;
     private Boolean visible;
     private Integer viewCount;
-    private List<ArticleTypeEntity> type;
+    private ArticleStatus status;
+    private Integer regionId;
+    private Integer categoryId;
+    private Integer moderatorId;
+    private Integer publishedId;
 }

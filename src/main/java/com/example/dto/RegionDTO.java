@@ -1,6 +1,9 @@
 package com.example.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -14,8 +17,19 @@ public class RegionDTO {
     private LocalDateTime createdDate;
     private LocalDateTime updatedDate;
     private Boolean visible;
+
+    @NotNull(message = "OrderNumber required")
     private Integer orderNumber;
+
+    @NotBlank
+    @NotNull(message = "OrderNumber required")
     private String nameUz;
+
+    @NotBlank
+    @Size(min = 10, max = 200, message = "NameUz must be between 10 and 200 characters")
     private String nameRu;
+
+    @NotBlank
+    @Size(min = 10, max = 200, message = "NameUz must be between 10 and 200 characters")
     private String nameEn;
 }

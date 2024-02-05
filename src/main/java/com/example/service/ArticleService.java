@@ -14,7 +14,6 @@ import com.example.repository.RegionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 
@@ -28,15 +27,13 @@ public class ArticleService {
     private ProfileRepository profileRepository;
     @Autowired
     private CategoryRepository categoryRepository;
-    @Autowired
-    private ArticleTypeService articleTypeService;
 
     public ArticleDTO create(ArticleCreateDTO dto, Integer profileId) {
         ArticleEntity entity = new ArticleEntity();
         entity.setTitle(dto.getTitle());
         entity.setDescription(dto.getDescription());
         entity.setContent(dto.getContent());
-        entity.setImagesId(dto.getImageId());
+//        entity.setImagesId(dto.getImageId());
         Optional<RegionEntity> regionEntity = regionRepository.findById(dto.getRegionId());
         if (regionEntity.isEmpty()) {
             throw new AppBadException("Region not found");
@@ -47,7 +44,6 @@ public class ArticleService {
             throw new AppBadException("Category not found");
         }
         entity.setCategory(categoryEntity.get());
-        List<ArticleTypeCrudeDTO> articleTypeCrudeDTOList = dto.getArticleType();
         entity.setStatus(ArticleStatus.NOT_PUBLISHED);
         Optional<ProfileEntity> profileEntityOptional = profileRepository.findById(profileId);
         if (profileEntityOptional.isEmpty()) {
@@ -62,14 +58,14 @@ public class ArticleService {
         ArticleDTO dto = new ArticleDTO();
         dto.setId(entity.getId());
         dto.setDescription(entity.getDescription());
-        dto.setCategory(entity.getCategory());
-        dto.setModerator(entity.getModerator());
-        dto.setRegion(entity.getRegion());
-        dto.setContent(entity.getContent());
-        dto.setImageId(entity.getImagesId());
-        dto.setStatus(entity.getStatus());
-        dto.setPublishedDate(entity.getPublishedDate());
-        dto.setPublisher(entity.getPublisher());
+//        dto.setCategory(entity.getCategory());
+//        dto.setModerator(entity.getModerator());
+//        dto.setRegion(entity.getRegion());
+//        dto.setContent(entity.getContent());
+//        dto.setImageId(entity.getImagesId());
+//        dto.setStatus(entity.getStatus());
+//        dto.setPublishedDate(entity.getPublishedDate());
+//        dto.setPublisher(entity.getPublisher());
         dto.setViewCount(entity.getViewCount());
         dto.setSharedCount(entity.getSharedCount());
         return dto;
@@ -84,7 +80,7 @@ public class ArticleService {
         entity.setTitle(check(dto.getTitle()) ? dto.getTitle() : entity.getTitle());
         entity.setDescription(check(dto.getDescription()) ? dto.getDescription() : entity.getDescription());
         entity.setContent(check(dto.getContent()) ? dto.getContent() : entity.getContent());
-        entity.setImagesId(check(dto.getImageId()) ? dto.getImageId() : entity.getImagesId());
+//        entity.setImagesId(check(dto.getImageId()) ? dto.getImageId() : entity.getImagesId());
         Optional<RegionEntity> regionEntity = regionRepository.findById(check(dto.getRegionId()) ? dto.getRegionId() : entity.getRegion().getId());
         if (regionEntity.isEmpty()) {
             throw new AppBadException("Region not found");

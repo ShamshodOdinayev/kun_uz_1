@@ -4,6 +4,7 @@ import com.example.dto.RegionDTO;
 import com.example.enums.AppLanguage;
 import com.example.service.RegionService;
 import com.example.util.JWTUtil;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,13 +19,13 @@ public class RegionController {
     private RegionService regionService;
 
     @PostMapping("")
-    public ResponseEntity<Boolean> create(@RequestBody RegionDTO dto,
+    public ResponseEntity<Boolean> create(@Valid @RequestBody RegionDTO dto,
                                           @RequestHeader(value = "Authorization") String jwt) {
         return JWTUtil.requestHeaderCheckAdmin(jwt) ? ResponseEntity.ok(regionService.create(dto)) : ResponseEntity.status(HttpStatus.FORBIDDEN).build();
     }
 
     @PostMapping("/{id}")
-    public ResponseEntity<RegionDTO> updateById(@PathVariable Integer id,
+    public ResponseEntity<RegionDTO> updateById(@Valid @PathVariable Integer id,
                                                 @RequestBody RegionDTO dto,
                                                 @RequestHeader(value = "Authorization") String jwt) {
         return JWTUtil.requestHeaderCheckAdmin(jwt) ? ResponseEntity.ok(regionService.updateById(dto, id)) : ResponseEntity.status(HttpStatus.FORBIDDEN).build();

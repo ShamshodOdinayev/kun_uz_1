@@ -1,20 +1,13 @@
 package com.example.controller;
 
-import org.springframework.core.io.Resource;
-import org.springframework.core.io.UrlResource;
-import org.springframework.http.HttpHeaders;
 import com.example.dto.AttachDTO;
 import com.example.service.AttachService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-
-import java.io.IOException;
-import java.net.MalformedURLException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 
 @RestController
 @RequestMapping("/attach")
@@ -46,14 +39,9 @@ public class AttachController {
         return ResponseEntity.ok().body(dto);
     }
 
-    @GetMapping("/download/{fileId}")
-    public ResponseEntity<Resource> downloadFile(@PathVariable String fileId) {
-        Resource resource = attachService.downloadFile(fileId);
-        // Faylni yuklab olish uchun response
-        return ResponseEntity.ok()
-                .contentType(MediaType.parseMediaType("application/octet-stream"))
-                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + resource.getFilename() + "\"")
-                .body(resource);
+    @GetMapping("/download/{fineName}")
+    public ResponseEntity<Resource> download(@PathVariable("fineName") String fileName) {
+        return attachService.downloadFile(fileName);
     }
 
 

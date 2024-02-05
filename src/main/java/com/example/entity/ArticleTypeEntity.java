@@ -17,4 +17,5 @@ public class ArticleTypeEntity extends BaseEntity {
     private String nameRu;
     @Column(name = "name_en")
     private String nameEn;
+
 }

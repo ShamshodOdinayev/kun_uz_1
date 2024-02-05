@@ -1,14 +1,15 @@
 package com.example.service;
 
-import org.springframework.core.io.Resource;
-import org.springframework.core.io.UrlResource;
-import org.springframework.http.HttpHeaders;
 import com.example.dto.AttachDTO;
 import com.example.entity.AttachEntity;
 import com.example.exp.AppBadException;
 import com.example.repository.AttachRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.UrlResource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -20,7 +21,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.util.Calendar;
-import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -147,20 +147,21 @@ public class AttachService {
         return attachRepository.findById(id).orElseThrow(() -> new AppBadException("File not found"));
     }
 
-    public Resource downloadFile(String fileId) {
-        AttachEntity entity = get(fileId);
-        String path = entity.getPath();
-        String extension = entity.getExtension();
-        String id = entity.getId();
-        String uploadDir = "./uploads/"; // filelar saqlangan folder
-        Path filePath = Paths.get(uploadDir + path + "/" + id + "." + extension).normalize();
-        Resource resource;
+    public ResponseEntity<Resource> downloadFile(String attachId) {
         try {
-            resource = new UrlResource(filePath.toUri());
+            String id = attachId.substring(0, attachId.lastIndexOf("."));
+            AttachEntity entity = get(id);
+            Path file = Paths.get("uploads/" + entity.getPath() + "/" + attachId);
+            Resource resource = new UrlResource(file.toUri());
+            if (resource.exists() || resource.isReadable()) {
+                return ResponseEntity.ok().header(HttpHeaders.CONTENT_DISPOSITION,
+                        "attachment; filename=\"" + entity.getOriginalName() + "\"").body(resource);
+            } else {
+                throw new AppBadException("Could not read the file!");
+            }
         } catch (MalformedURLException e) {
             throw new AppBadException("File not found");
         }
-        return resource;
     }
 
 

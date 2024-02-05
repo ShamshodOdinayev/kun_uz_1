@@ -26,30 +26,39 @@ public class ArticleEntity {
     private String content;
     @Column(name = "shared_count")
     private Integer sharedCount;
-    @Column(name = "image_id")
-    private String imagesId;
     @Column(name = "created_date")
-    private LocalDateTime createdDate=LocalDateTime.now();
+    private LocalDateTime createdDate = LocalDateTime.now();
     @Column(name = "published_date")
     private LocalDateTime publishedDate;
     @Column(name = "visible")
-    private Boolean visible=true;
+    private Boolean visible = true;
     @Column(name = "view_count")
     private Integer viewCount;
     @Enumerated(EnumType.STRING)
     @Column(name = "status")
-    private ArticleStatus status;
+    private ArticleStatus status = ArticleStatus.NOT_PUBLISHED;
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "region_id")
+    @JoinColumn(name = "article_attach_id")
+    private ArticleAttachEntity articleAttach;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "article_news_type_id")
+    private ArticleNewsTypeEntity articleNewsType;
+    @Column(name = "region_id")
+    private Integer regionId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "region_id", insertable = false, updatable = false)
     private RegionEntity region;
+    @Column(name = "category_id")
+    private Integer categoryId;
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "category_id")
+    @JoinColumn(name = "category_id", insertable = false, updatable = false)
     private CategoryEntity category;
+    @Column(name = "moderator_id")
+    private Integer moderatorId;
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "moderator_id")
+    @JoinColumn(name = "moderator_id", insertable = false, updatable = false)
     private ProfileEntity moderator;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "publisher_id")
     private ProfileEntity publisher;
-
 }

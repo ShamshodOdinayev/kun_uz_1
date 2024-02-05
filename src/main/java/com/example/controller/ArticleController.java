@@ -19,8 +19,7 @@ public class ArticleController {
 
     @PostMapping("/adm")
     public ResponseEntity<ArticleDTO> create(@RequestBody ArticleCreateDTO dto,
-                                              HttpServletRequest request
-    ) {
+                                             HttpServletRequest request) {
         Integer profileId = HttpRequestUtil.getProfileId(request, ProfileRole.MODERATOR);
         return ResponseEntity.ok(articleService.create(dto, profileId));
     }
@@ -28,18 +27,19 @@ public class ArticleController {
     @PutMapping("/adm/{id}")
     public ResponseEntity<ArticleDTO> update(@RequestBody ArticleCreateDTO dto,
                                              @PathVariable String id,
-                                              HttpServletRequest request) {
+                                             HttpServletRequest request) {
         HttpRequestUtil.getProfileId(request, ProfileRole.MODERATOR, ProfileRole.PUBLISHER);
         return ResponseEntity.ok(articleService.updateById(dto, id));
     }
 
     @GetMapping("/adm")
-    public ResponseEntity<ArticleShortInfoDTO> getLastArticleByType(@RequestParam(value = "typeId",defaultValue = "1") String typeId,
-                                                                    @RequestParam(value = "size",defaultValue = "3") Integer size){
+    public ResponseEntity<ArticleShortInfoDTO> getLastArticleByType(@RequestParam(value = "typeId", defaultValue = "1") String typeId,
+                                                                    @RequestParam(value = "size", defaultValue = "3") Integer size) {
         return ResponseEntity.ok(articleService.getLastArticleByType(typeId, size));
     }
+
     @GetMapping("")
-    public ResponseEntity<ArticleShortInfoDTO> getByIdAndLang(){
+    public ResponseEntity<ArticleShortInfoDTO> getByIdAndLang() {
         return null;
     }
 
