@@ -1,37 +1,27 @@
 ### Create
 POST localhost:8080/article/adm
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MDY5NzgyMjIsImlkIjoyLCJyb2xlIjoiTU9ERVJBVE9SIiwiZXhwIjoxNzA3MDY0NjIyLCJpc3MiOiJLdW5VelRlc3QifQ.VBeTh68DzpFow0ZZV5GZnUEc-lt4zpSTpRN6HUKJxwmAG0mu_QzmDlDzHOCd3oJiTreDmb4Er0-kR9x8422imw
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MDcyMjY2OTUsImlkIjoyLCJyb2xlIjoiTU9ERVJBVE9SIiwiZXhwIjoxNzA3MzEzMDk1LCJpc3MiOiJLdW5VelRlc3QifQ.asKVJjOZUKbl1ZauQlwVtLVo64z55AgfJUSb4k_CRgUYynQbjNdNBMN-BbbyuaDo6H59RYBDE9gIpcK79piu0g
 
 {
   "title": "title1",
-  "categoryId": 1,
+  "description": "d1",
   "articleType": [
-    {
-      "orderNumber": 2,
-      "nameUz": "JAHON",
-      "nameRu": "МИР",
-      "nameEn": "YEAH"
-    },
-    {
-      "orderNumber": 1,
-      "nameUz": "O'zbekiston",
-      "nameRu": "УЗБЕКИСТАН",
-      "nameEn": "Uzbekistan"
-    }
+    1,
+    2
   ],
-  "content": "content1",
-  "description": "description1",
-  "imageId": "imageId1",
-  "regionId": 1
+  "categoryId": 1,
+  "photoId": "f6d5fa34-892b-4e80-b055-ed4a5dbce6b7",
+  "regionId": 1,
+  "content": "c1"
 }
 
+
 ### Update
-PUT localhost:8080/article/adm/b08df1ff-4fcf-4458-89a7-0f4eb04197af
+PUT localhost:8080/article/adm/dfdc452c-65f0-4316-90c9-9bb52b5f65af
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MDY5Njc3OTcsImlkIjoyLCJyb2xlIjoiTU9ERVJBVE9SIiwiZXhwIjoxNzA3MDU0MTk3LCJpc3MiOiJLdW5VelRlc3QifQ.FhkhfdmAZ5QAIOR4t_FghBTRyLrVsUrGY8VRYI9jbkuuTtU_wvmdP0igS_lo-L-HK0XQt32U_2ub-eX54sYt8g
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MDcyMjY2OTUsImlkIjoyLCJyb2xlIjoiTU9ERVJBVE9SIiwiZXhwIjoxNzA3MzEzMDk1LCJpc3MiOiJLdW5VelRlc3QifQ.asKVJjOZUKbl1ZauQlwVtLVo64z55AgfJUSb4k_CRgUYynQbjNdNBMN-BbbyuaDo6H59RYBDE9gIpcK79piu0g
 
 {
-  "regionId": 1,
-  "content": "ewklfhiwuefhwjfdewoifhew"
+  "articleType": [4,1]
 }

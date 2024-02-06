@@ -16,6 +16,7 @@ public class ArticleNewsTypeEntity extends BaseEntity {
     @ManyToOne
     @JoinColumn(name = "article_id", insertable = false, updatable = false)
     private ArticleEntity article;
+
     @Column(name = "types_id")
     private Integer typesId;
     @ManyToOne

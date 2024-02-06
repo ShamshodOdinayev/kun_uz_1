@@ -6,6 +6,7 @@ import com.example.dto.ArticleShortInfoDTO;
 import com.example.enums.ProfileRole;
 import com.example.service.ArticleService;
 import com.example.util.HttpRequestUtil;
+import com.example.util.JWTUtil;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -20,22 +21,20 @@ public class ArticleController {
     @PostMapping("/adm")
     public ResponseEntity<ArticleDTO> create(@RequestBody ArticleCreateDTO dto,
                                              HttpServletRequest request) {
-        Integer profileId = HttpRequestUtil.getProfileId(request, ProfileRole.MODERATOR);
-        return ResponseEntity.ok(articleService.create(dto, profileId));
+        return ResponseEntity.ok(articleService.create(dto, 2));
     }
 
     @PutMapping("/adm/{id}")
     public ResponseEntity<ArticleDTO> update(@RequestBody ArticleCreateDTO dto,
                                              @PathVariable String id,
                                              HttpServletRequest request) {
-        HttpRequestUtil.getProfileId(request, ProfileRole.MODERATOR, ProfileRole.PUBLISHER);
         return ResponseEntity.ok(articleService.updateById(dto, id));
     }
 
     @GetMapping("/adm")
     public ResponseEntity<ArticleShortInfoDTO> getLastArticleByType(@RequestParam(value = "typeId", defaultValue = "1") String typeId,
                                                                     @RequestParam(value = "size", defaultValue = "3") Integer size) {
-        return ResponseEntity.ok(articleService.getLastArticleByType(typeId, size));
+        return null;
     }
 
     @GetMapping("")

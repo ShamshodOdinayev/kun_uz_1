@@ -1,7 +1,7 @@
 ### Create profile
 POST localhost:8080/profile
 Content-Type: application/json
-Authorization: eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MDY5Njc2MzgsImlkIjoxLCJyb2xlIjoiQURNSU4iLCJleHAiOjE3MDcwNTQwMzgsImlzcyI6Ikt1blV6VGVzdCJ9.Ees4PFTxX_Bq9_gKdfI6FPME_GNnpaJL5MjLG_75R0YHW9gVDRNyTAvurm-8OvqP_iYELy9_z_A68n_k4ftk8A
+Authorization: eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MDcyMjY2NjYsImlkIjoxLCJyb2xlIjoiQURNSU4iLCJleHAiOjE3MDczMTMwNjYsImlzcyI6Ikt1blV6VGVzdCJ9.G45H_A8Az3OM3bwr6rY6tASJk5biq1Q313h8OTiTd2ZxMPuay2s60z3lOfoQHMBPGRu5XRaADIQbiaocEVpMHg
 
 {
   "name": "Shamshod",

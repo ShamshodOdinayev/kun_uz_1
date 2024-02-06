@@ -3,9 +3,9 @@ POST http://localhost:8080/attach/upload
 Content-Type: multipart/form-data; boundary=WebAppBoundary
 
 --WebAppBoundary
-Content-Disposition: form-data; name="file"; filename="rasm2.jpg"
+Content-Disposition: form-data; name="file"; filename="rasm3.jpg"
 
-< C:\Users\Shamshod Odinayev\Desktop\rasm\rasm2.png
+< C:\Users\Shamshod Odinayev\Desktop\rasm\rasm3.png
 
 ### GET
 GET localhost:8080/attach/open/kunuz.jpg

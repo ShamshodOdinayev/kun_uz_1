@@ -37,28 +37,50 @@ public class ArticleEntity {
     @Enumerated(EnumType.STRING)
     @Column(name = "status")
     private ArticleStatus status = ArticleStatus.NOT_PUBLISHED;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "article_attach_id")
     private ArticleAttachEntity articleAttach;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "article_news_type_id")
     private ArticleNewsTypeEntity articleNewsType;
+
     @Column(name = "region_id")
     private Integer regionId;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "region_id", insertable = false, updatable = false)
     private RegionEntity region;
+
+
     @Column(name = "category_id")
     private Integer categoryId;
+
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "category_id", insertable = false, updatable = false)
     private CategoryEntity category;
+
+
     @Column(name = "moderator_id")
     private Integer moderatorId;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "moderator_id", insertable = false, updatable = false)
     private ProfileEntity moderator;
+
+    @Column(name = "publisher_id")
+    private Integer publisherId;
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "publisher_id")
+    @JoinColumn(name = "publisher_id", insertable = false, updatable = false)
     private ProfileEntity publisher;
+
+    @Column(name = "photo_id")
+    private String photoId;
+    @ManyToOne
+    @JoinColumn(name = "photo_id", insertable = false, updatable = false)
+    private AttachEntity photo;
+
+    @OneToMany(mappedBy = "article")
+    private List<ArticleNewsTypeEntity> articleTypesList;
+
 }
