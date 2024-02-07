@@ -23,5 +23,16 @@ Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MDcyMjY2OTUsImlkIjoyLCJyb2xlIjoiTU9ERVJBVE9SIiwiZXhwIjoxNzA3MzEzMDk1LCJpc3MiOiJLdW5VelRlc3QifQ.asKVJjOZUKbl1ZauQlwVtLVo64z55AgfJUSb4k_CRgUYynQbjNdNBMN-BbbyuaDo6H59RYBDE9gIpcK79piu0g
 
 {
-  "articleType": [4,1]
+  "articleType": [2,2]
 }
+
+### Delete by id
+DELETE localhost:8080/article/adm/dfdc452c-65f0-4316-90c9-9bb52b5f6qaf
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MDcyMjY2OTUsImlkIjoyLCJyb2xlIjoiTU9ERVJBVE9SIiwiZXhwIjoxNzA3MzEzMDk1LCJpc3MiOiJLdW5VelRlc3QifQ.asKVJjOZUKbl1ZauQlwVtLVo64z55AgfJUSb4k_CRgUYynQbjNdNBMN-BbbyuaDo6H59RYBDE9gIpcK79piu0g
+
+### Change Status by id
+PUT localhost:8080/article/adm/changeStatus/50a8dc5b-7c12-4625-acfe-c9dfed62f237
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MDcyMjY2OTUsImlkIjoyLCJyb2xlIjoiTU9ERVJBVE9SIiwiZXhwIjoxNzA3MzEzMDk1LCJpc3MiOiJLdW5VelRlc3QifQ.asKVJjOZUKbl1ZauQlwVtLVo64z55AgfJUSb4k_CRgUYynQbjNdNBMN-BbbyuaDo6H59RYBDE9gIpcK79piu0g
+
+### Get by type and size
+GET localhost:8080/article/getTypeId?typeId=1&size=111111

@@ -2,17 +2,15 @@ package com.example.service;
 
 import com.example.dto.ArticleCreateDTO;
 import com.example.dto.ArticleDTO;
-import com.example.dto.ArticleShortInfoDTO;
 import com.example.entity.ArticleEntity;
 import com.example.entity.ArticleNewsTypeEntity;
+import com.example.enums.ArticleStatus;
 import com.example.exp.AppBadException;
 import com.example.repository.ArticleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class ArticleService {
@@ -67,4 +65,30 @@ public class ArticleService {
         return optionalArticleEntity.get();
     }
 
+    public Boolean deleteById(String id) {
+        get(id);
+        articleRepository.deleteById(id);
+        return true;
+    }
+
+    public Integer changeStatusById(String id) {
+        ArticleEntity entity = get(id);
+        if (entity.getStatus().equals(ArticleStatus.PUBLISHED)) {
+            return articleRepository.changeStatusById(id, ArticleStatus.NOT_PUBLISHED);
+        }
+        return articleRepository.changeStatusById(id, ArticleStatus.PUBLISHED);
+    }
+
+    public List<ArticleDTO> getLastArticleByType(Integer typeId, int size) {
+        List<ArticleNewsTypeEntity> articleByType = articleNewsTypeService.getLastArticleByType(typeId, size);
+        List<ArticleEntity> entitySet = new LinkedList<>();
+        List<ArticleDTO> dtoList = new LinkedList<>();
+        for (int i = 0; i < Math.min(articleByType.size(), size); i++) {
+            entitySet.add(articleRepository.findById(articleByType.get(i).getArticleId()).get());
+        }
+        for (ArticleEntity entity : entitySet) {
+            dtoList.add(toDTO(entity));
+        }
+        return dtoList;
+    }
 }

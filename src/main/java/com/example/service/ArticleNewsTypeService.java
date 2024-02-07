@@ -5,9 +5,8 @@ import com.example.repository.ArticleNewsTypeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.LinkedList;
 import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
 
 @Service
 public class ArticleNewsTypeService {
@@ -33,18 +32,59 @@ public class ArticleNewsTypeService {
 //        // [1,2,3,4,5] new
 //
 //        // update
-//        //[1,2,3,4,5] - old
+//        //[1,5] - old
+        //  [7,5,5]- typesIdList
 //        //[7,5] - new
-        List<ArticleNewsTypeEntity> optionalArticleNewsType = articleNewsTypeRepository.findByArticleId(articleId);
+        List<ArticleNewsTypeEntity> optionalArticleNewsType = articleNewsTypeRepository.findByArticleIdAndVisible(articleId, true);
+        List<Integer> old = new LinkedList<>();
+        List<Integer> newAry = new LinkedList<>();
+
+        for (ArticleNewsTypeEntity entity : optionalArticleNewsType) {
+            old.add(entity.getTypesId());
+        }
+        if (old.isEmpty()) {
+            create(articleId, typesIdList);
+        }
+        for (int i = 0; i < old.size(); i++) {
+            for (int j = 0; j < typesIdList.size(); j++) {
+                if (old.get(i) == typesIdList.get(j)) {
+                    newAry.add(old.get(i));
+                }
+            }
+        }
         for (int i = 0; i < typesIdList.size(); i++) {
+            for (int j = 0; j < newAry.size(); j++) {
+                if (typesIdList.get(i) != newAry.get(j)) {
+                    newAry.add(typesIdList.get(i));
+                }
+            }
+        }
+        for (Integer i : old) {
+            articleNewsTypeRepository.updateByArticleIdAndTypesId(articleId, i);
+        }
+
+        for (Integer i : newAry) {
+            create(articleId, i);
+        }
+
+
+
+
+
+
+
+       /* for (int i = 0; i < typesIdList.size(); i++) {
             for (ArticleNewsTypeEntity entity : optionalArticleNewsType) {
                 if (typesIdList.get(i) != entity.getTypesId()) {
                     articleNewsTypeRepository.deleteByTypesId(entity.getTypesId(), articleId);
                 }
             }
         }
-        create(articleId, typesIdList);
+        create(articleId, typesIdList);*/
 
     }
 
+    public List<ArticleNewsTypeEntity> getLastArticleByType(Integer typeId, Integer size) {
+        return articleNewsTypeRepository.findByTypesIdAndVisibleOrderByCreatedDate(typeId, true);
+    }
 }

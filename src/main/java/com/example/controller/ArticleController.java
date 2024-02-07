@@ -2,15 +2,14 @@ package com.example.controller;
 
 import com.example.dto.ArticleCreateDTO;
 import com.example.dto.ArticleDTO;
-import com.example.dto.ArticleShortInfoDTO;
-import com.example.enums.ProfileRole;
+import com.example.entity.ArticleEntity;
 import com.example.service.ArticleService;
-import com.example.util.HttpRequestUtil;
-import com.example.util.JWTUtil;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Set;
 
 @RestController
 @RequestMapping("/article")
@@ -31,15 +30,20 @@ public class ArticleController {
         return ResponseEntity.ok(articleService.updateById(dto, id));
     }
 
-    @GetMapping("/adm")
-    public ResponseEntity<ArticleShortInfoDTO> getLastArticleByType(@RequestParam(value = "typeId", defaultValue = "1") String typeId,
-                                                                    @RequestParam(value = "size", defaultValue = "3") Integer size) {
-        return null;
+    @DeleteMapping("/adm/{id}")
+    public ResponseEntity<Boolean> deleteById(@PathVariable String id) {
+        return ResponseEntity.ok(articleService.deleteById(id));
     }
 
-    @GetMapping("")
-    public ResponseEntity<ArticleShortInfoDTO> getByIdAndLang() {
-        return null;
+    @PutMapping("/adm/changeStatus/{id}")
+    public ResponseEntity<Integer> changeStatusById(@PathVariable String id) {
+        return ResponseEntity.ok(articleService.changeStatusById(id));
+    }
+
+    @GetMapping("/getTypeId")
+    public ResponseEntity<?> getLastArticleByType(@RequestParam(value = "typeId", defaultValue = "1") Integer typeId,
+                                                  @RequestParam(value = "size", defaultValue = "3") Integer size) {
+        return ResponseEntity.ok(articleService.getLastArticleByType(typeId, size));
     }
 
 
