@@ -3,12 +3,14 @@ package com.example.controller;
 import com.example.exp.AppBadException;
 import com.example.exp.ForbiddenException;
 import io.jsonwebtoken.JwtException;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 @ControllerAdvice
+@Slf4j
 public class ExceptionHandlerController {
     @ExceptionHandler(AppBadException.class)
     private ResponseEntity<?> handle(AppBadException e) {
@@ -27,7 +29,7 @@ public class ExceptionHandlerController {
 
     @ExceptionHandler(RuntimeException.class)
     private ResponseEntity<?> handle(RuntimeException e) {
-        e.printStackTrace();
+        log.error(e.getMessage());
         return ResponseEntity.internalServerError().body(e.getMessage());
     }
 }
