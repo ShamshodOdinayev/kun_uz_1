@@ -21,7 +21,7 @@ public interface ArticleNewsTypeRepository extends CrudRepository<ArticleNewsTyp
     @Query("update ArticleNewsTypeEntity set visible=false where articleId=?1 and typesId=?2")
     void updateByArticleIdAndTypesId(String articleId, Integer typesId);
 
-    List<ArticleNewsTypeEntity> findByTypesIdAndVisibleOrderByCreatedDate(Integer typesId, Boolean visible);
+    List<ArticleNewsTypeEntity> findByTypesIdAndVisibleOrderByCreatedDate(Long typesId, Boolean visible);
 
 
 }

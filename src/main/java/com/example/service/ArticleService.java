@@ -2,6 +2,8 @@ package com.example.service;
 
 import com.example.dto.ArticleCreateDTO;
 import com.example.dto.ArticleDTO;
+import com.example.dto.ArticleShortInfoDTO;
+import com.example.dto.GetTheLastArticleNotListedDTO;
 import com.example.entity.ArticleEntity;
 import com.example.entity.ArticleNewsTypeEntity;
 import com.example.enums.ArticleStatus;
@@ -18,6 +20,8 @@ public class ArticleService {
     private ArticleRepository articleRepository;
     @Autowired
     private ArticleNewsTypeService articleNewsTypeService;
+    @Autowired
+    private AttachService attachService;
 
 
     public ArticleDTO create(ArticleCreateDTO dto, Integer profileId) {
@@ -79,7 +83,7 @@ public class ArticleService {
         return articleRepository.changeStatusById(id, ArticleStatus.PUBLISHED);
     }
 
-    public List<ArticleDTO> getLastArticleByType(Integer typeId, int size) {
+    public List<ArticleDTO> getLastArticleByType(Long typeId, int size) {
         List<ArticleNewsTypeEntity> articleByType = articleNewsTypeService.getLastArticleByType(typeId, size);
         List<ArticleEntity> entitySet = new LinkedList<>();
         List<ArticleDTO> dtoList = new LinkedList<>();
@@ -90,5 +94,45 @@ public class ArticleService {
             dtoList.add(toDTO(entity));
         }
         return dtoList;
+    }
+
+    public List<ArticleShortInfoDTO> getTheLastArticleNotListed(GetTheLastArticleNotListedDTO dto) {
+        List<ArticleShortInfoDTO> shortInfoDTOList = new LinkedList<>();
+        String[] articles = dto.getArticles();
+        Integer size = dto.getSize();
+        List<ArticleEntity> entityList = articleRepository.findAllByOrderByCreatedDate();
+//        List<ArticleDTO> shortInfoDTOList = new LinkedList<>();
+        int count = 0;
+        for (ArticleEntity entity : entityList) {
+            for (String id : articles) {
+                if (entity.getId().equals(id)) {
+                    count++;
+                }
+            }
+            if (count == 0) {
+                if (shortInfoDTOList.size() >= size) {
+                    return shortInfoDTOList;
+                }
+                shortInfoDTOList.add(toShortInfoDTO(entity));
+            }
+            count = 0;
+        }
+        return shortInfoDTOList;
+    }
+
+    public ArticleShortInfoDTO toShortInfoDTO(ArticleEntity entity) {
+        ArticleShortInfoDTO dto = new ArticleShortInfoDTO();
+        dto.setId(entity.getId());
+        dto.setTitle(entity.getTitle());
+        dto.setDescription(entity.getDescription());
+        dto.setImage(attachService.toDTO(entity.getPhoto()));
+        dto.setPublishedDate(entity.getPublishedDate());
+        return dto;
+    }
+
+    public List<ArticleDTO> getByIdAndLang(String id, String lang) {
+
+
+        return null;
     }
 }

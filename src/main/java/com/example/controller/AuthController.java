@@ -22,13 +22,7 @@ public class AuthController {
     @PostMapping("/login")
     @Operation(summary = "Api for login", description = "this api used for authorization")
     public ResponseEntity<ProfileDTO> login(@RequestBody AuthDTO dto) {
-        log.trace("Login In Trace");
-        log.debug("Login In Debug");
-
-        log.info("Login {} ", dto.getEmail());
         log.warn("Login {} ", dto.getEmail());
-        log.error("Login {} ", dto.getEmail());
-
         return ResponseEntity.ok(authService.auth(dto));
     }
 

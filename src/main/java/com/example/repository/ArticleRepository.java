@@ -21,8 +21,6 @@ public interface ArticleRepository extends CrudRepository<ArticleEntity, String>
     @Query("update ArticleEntity set status=?2 where id=?1")
     Integer changeStatusById(String id, ArticleStatus status);
 
-   /* @Transactional
-    @Modifying
-    @Query("from ArticleEntity where  ")
-    List<ArticleEntity> getLastArticleByType(String typeId, Integer size);*/
+    @Query("from ArticleEntity where visible=true order by createdDate")
+    List<ArticleEntity> findAllByOrderByCreatedDate();
 }
