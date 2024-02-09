@@ -9,10 +9,10 @@ import jakarta.servlet.Filter;
 
 @Configuration
 public class SecuredFilterConfig {
-    @Autowired
-    private TokenFilter tokenFilter;
+   /* @Autowired
+    private TokenFilter tokenFilter;*/
 
-    @Bean
+   /* @Bean
     public FilterRegistrationBean<Filter> filterRegistrationBean() {
         FilterRegistrationBean<Filter> bean = new FilterRegistrationBean<>();
         bean.setFilter(tokenFilter);
@@ -35,5 +35,5 @@ public class SecuredFilterConfig {
         bean.addUrlPatterns("/region/adm/**");
 
         return bean;
-    }
+    }*/
 }

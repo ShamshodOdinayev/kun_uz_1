@@ -1,10 +1,10 @@
 ### Create region
 POST localhost:8080/region
 Content-Type: application/json
-Authorization: eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MDcyMjY4NDYsImlkIjoxLCJyb2xlIjoiQURNSU4iLCJleHAiOjE3MDczMTMyNDYsImlzcyI6Ikt1blV6VGVzdCJ9.iK4YwfGCtLoMFjrPvypnr46ghC2s_iPVeY6oyrn5fApM8UkUATP-Q0J-B5iwrGCumIRqpkwOApZtqdTnoOXwIw
+Authorization: Basic dXNlcjpmOTEzOTcyYS05ZDNhLTQ5MGMtYWU0ZC1lNDdkMjgxMDUwZGE=
 
 {
-  "orderNumber": 3,
+  "orderNumber": 5,
   "nameUz": "Qoraqalpog'iston",
   "nameEn": "Karakalpakstan",
   "nameRu": "Қорақалпоғистан"

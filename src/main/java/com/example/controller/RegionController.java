@@ -23,10 +23,9 @@ public class RegionController {
     private RegionService regionService;
 
     @PostMapping("")
-    public ResponseEntity<Boolean> create(@Valid @RequestBody RegionDTO dto,
-                                          @RequestHeader(value = "Authorization") String jwt) {
-        log.warn("create region{}", jwt);
-        return JWTUtil.requestHeaderCheckAdmin(jwt) ? ResponseEntity.ok(regionService.create(dto)) : ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+    public ResponseEntity<Boolean> create(@Valid @RequestBody RegionDTO dto) {
+//        log.warn("create region{}", jwt);
+        return ResponseEntity.ok(regionService.create(dto));
     }
 
     @PostMapping("/{id}")
