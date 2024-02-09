@@ -6,6 +6,7 @@ import com.example.dto.ArticleShortInfoDTO;
 import com.example.dto.GetTheLastArticleNotListedDTO;
 import com.example.entity.ArticleEntity;
 import com.example.entity.ArticleNewsTypeEntity;
+import com.example.entity.RegionEntity;
 import com.example.enums.ArticleStatus;
 import com.example.exp.AppBadException;
 import com.example.repository.ArticleRepository;
@@ -22,6 +23,8 @@ public class ArticleService {
     private ArticleNewsTypeService articleNewsTypeService;
     @Autowired
     private AttachService attachService;
+    @Autowired
+    private RegionService regionService;
 
 
     public ArticleDTO create(ArticleCreateDTO dto, Integer profileId) {
@@ -84,7 +87,7 @@ public class ArticleService {
     }
 
     public List<ArticleDTO> getLastArticleByType(Long typeId, int size) {
-        List<ArticleNewsTypeEntity> articleByType = articleNewsTypeService.getLastArticleByType(typeId, size);
+        List<ArticleNewsTypeEntity> articleByType = articleNewsTypeService.getLastArticleByType(typeId);
         List<ArticleEntity> entitySet = new LinkedList<>();
         List<ArticleDTO> dtoList = new LinkedList<>();
         for (int i = 0; i < Math.min(articleByType.size(), size); i++) {
@@ -131,8 +134,43 @@ public class ArticleService {
     }
 
     public List<ArticleDTO> getByIdAndLang(String id, String lang) {
-
-
+        //TODO :
         return null;
+    }
+
+    public Integer increaseViewCount(String id) {
+        ArticleEntity entity = get(id);
+        int viewCount = entity.getViewCount() == null ? 0 : entity.getViewCount();
+        entity.setViewCount(viewCount + 1);
+        articleRepository.save(entity);
+        return viewCount + 1;
+    }
+
+    public Integer increaseShareViewCount(String id) {
+        ArticleEntity entity = get(id);
+        int sharedCount = entity.getSharedCount() == null ? 0 : entity.getSharedCount();
+        entity.setSharedCount(sharedCount + 1);
+        articleRepository.save(entity);
+        return sharedCount + 1;
+    }
+
+    public List<ArticleShortInfoDTO> getMostRead(int size) {
+        List<ArticleEntity> entityList = articleRepository.getMostRead(size);
+        List<ArticleShortInfoDTO> dtoList = new LinkedList<>();
+        for (ArticleEntity entity : entityList) {
+            dtoList.add(toShortInfoDTO(entity));
+        }
+        return dtoList;
+    }
+
+    public List<ArticleShortInfoDTO> getTypeAndByRegion(Long typeId, Integer regionId) {
+        List<ArticleNewsTypeEntity> articleByType = articleNewsTypeService.getLastArticleByType(typeId);
+        List<ArticleShortInfoDTO> dtoList = new LinkedList<>();
+        RegionEntity region = regionService.get(regionId);
+        for (ArticleNewsTypeEntity articleNewsTypeEntity : articleByType) {
+            Optional<ArticleEntity> allByIdAndRegion = articleRepository.findAllByIdAndRegionAndVisible(articleNewsTypeEntity.getArticleId(), region,true);
+            allByIdAndRegion.ifPresent(entity -> dtoList.add(toShortInfoDTO(entity)));
+        }
+        return dtoList;
     }
 }

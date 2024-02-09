@@ -1,6 +1,7 @@
 package com.example.repository;
 
 import com.example.entity.ArticleEntity;
+import com.example.entity.RegionEntity;
 import com.example.enums.ArticleStatus;
 import jakarta.transaction.Transactional;
 import org.jetbrains.annotations.NotNull;
@@ -9,6 +10,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface ArticleRepository extends CrudRepository<ArticleEntity, String> {
     @Transactional
@@ -23,4 +25,9 @@ public interface ArticleRepository extends CrudRepository<ArticleEntity, String>
 
     @Query("from ArticleEntity where visible=true order by createdDate")
     List<ArticleEntity> findAllByOrderByCreatedDate();
+
+    @Query("from ArticleEntity where visible=true order by viewCount limit ?1")
+    List<ArticleEntity> getMostRead(int size);
+
+    Optional<ArticleEntity> findAllByIdAndRegionAndVisible(String id, RegionEntity region, Boolean visible);
 }

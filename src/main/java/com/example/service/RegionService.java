@@ -110,4 +110,12 @@ public class RegionService {
         }
         return dtoList;
     }
+
+    public RegionEntity get(Integer id) {
+        Optional<RegionEntity> regionEntityOptional = regionRepository.findById(id);
+        if (regionEntityOptional.isEmpty()) {
+            throw new AppBadException("Region not found");
+        }
+        return regionEntityOptional.get();
+    }
 }

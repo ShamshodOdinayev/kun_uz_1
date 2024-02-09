@@ -84,7 +84,7 @@ public class ArticleNewsTypeService {
 
     }
 
-    public List<ArticleNewsTypeEntity> getLastArticleByType(Long typeId, Integer size) {
+    public List<ArticleNewsTypeEntity> getLastArticleByType(Long typeId) {
         return articleNewsTypeRepository.findByTypesIdAndVisibleOrderByCreatedDate(typeId, true);
     }
 }

@@ -7,12 +7,12 @@ Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MDczOTI0OTksImlkIjoxLCJyb
   "title": "title1",
   "description": "d1",
   "articleType": [
-    3,
+    2,
     4
   ],
   "categoryId": 1,
   "photoId": "f6d5fa34-892b-4e80-b055-ed4a5dbce6b7",
-  "regionId": 1,
+  "regionId": 2,
   "content": "c1"
 }
 
@@ -40,7 +40,7 @@ Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MDcyMjY2OTUsImlkIjoyLCJyb
 ### Get by type and size
 GET localhost:8080/article/getTypeId?typeId=1&size=2
 
-###
+### Not Listed
 POST localhost:8080/article/notListed
 Content-Type: application/json
 
@@ -50,3 +50,15 @@ Content-Type: application/json
   ],
   "size": 2
 }
+
+### Increase View Count
+POST localhost:8080/article/increaseViewCount/d8cdf85d-c7b9-440b-b55a-35ba0cc2fac2
+
+### Increase share view Count
+POST localhost:8080/article/increaseShareViewCount/d8cdf85d-c7b9-440b-b55a-35ba0cc2fac2
+
+### Get size most read articles
+GET localhost:8080/article/getMostRead?size=2
+
+### Get article type and region
+GET localhost:8080/article/getTypeAndByRegion?typeId=2&regionId=2

@@ -66,4 +66,26 @@ public class ArticleController {
         return ResponseEntity.ok(articleService.getByIdAndLang(id, lang));
     }
 
+    @PostMapping("/increaseViewCount/{id}")
+    public ResponseEntity<Integer> increaseViewCount(@PathVariable String id) {
+        return ResponseEntity.ok(articleService.increaseViewCount(id));
+    }
+
+    @PostMapping("/increaseShareViewCount/{id}")
+    public ResponseEntity<Integer> increaseShareViewCount(@PathVariable String id) {
+        return ResponseEntity.ok(articleService.increaseShareViewCount(id));
+    }
+
+    @GetMapping("/getMostRead")
+    public ResponseEntity<List<ArticleShortInfoDTO>> getMostRead(@RequestParam(value = "size", defaultValue = "4") Integer size) {
+        return ResponseEntity.ok(articleService.getMostRead(size));
+    }
+
+    @GetMapping("/getTypeAndByRegion")
+    public ResponseEntity<List<ArticleShortInfoDTO>> getTypeAndByRegion(@RequestParam(value = "typeId") Long typeId,
+                                                                        @RequestParam(value = "regionId") Integer regionId) {
+        return ResponseEntity.ok(articleService.getTypeAndByRegion(typeId, regionId));
+    }
+
+
 }
