@@ -29,6 +29,11 @@ public class SecuredFilterConfig {
         bean.addUrlPatterns("/region/adm/*");
 
         bean.addUrlPatterns("/profile/adm/**");
+
+        bean.addUrlPatterns("/comment/**");
+        bean.addUrlPatterns("/comment/*");
+        bean.addUrlPatterns("/comment");
+
         bean.addUrlPatterns("/articleLike/**");
         bean.addUrlPatterns("/articleLike/*");
         bean.addUrlPatterns("/emailHistory/adm/**");

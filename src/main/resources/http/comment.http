@@ -1,0 +1,10 @@
+### Coomet create
+POST localhost:8080/comment
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MDc3MzEwMjEsImlkIjoxLCJyb2xlIjoiQURNSU4iLCJleHAiOjE3MDc4MTc0MjEsImlzcyI6Ikt1blV6VGVzdCJ9.TopDEoa2WwC4MvVwRXHPj2vbYhshpNvwHCDZxziTSKGtKqVAyCmwXYBtgVv3tcMpOPoh04PHqiseXlXNC-IEoQ
+
+{
+  "content": "Daxshat",
+  "articleId": "59fbafed-86f0-4c20-88cb-0c47dd1bd94e",
+  "replyId": 1
+}

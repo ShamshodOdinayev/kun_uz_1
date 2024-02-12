@@ -64,7 +64,7 @@ public class ArticleService {
         return toDTO(entity);
     }
 
-    private ArticleEntity get(String id) {
+    public ArticleEntity get(String id) {
         Optional<ArticleEntity> optionalArticleEntity = articleRepository.findById(id);
         if (optionalArticleEntity.isEmpty()) {
             throw new AppBadException("Article not found");
