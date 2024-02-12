@@ -9,10 +9,10 @@ import jakarta.servlet.Filter;
 
 @Configuration
 public class SecuredFilterConfig {
-   /* @Autowired
-    private TokenFilter tokenFilter;*/
+    @Autowired
+    private TokenFilter tokenFilter;
 
-   /* @Bean
+    @Bean
     public FilterRegistrationBean<Filter> filterRegistrationBean() {
         FilterRegistrationBean<Filter> bean = new FilterRegistrationBean<>();
         bean.setFilter(tokenFilter);
@@ -29,11 +29,13 @@ public class SecuredFilterConfig {
         bean.addUrlPatterns("/region/adm/*");
 
         bean.addUrlPatterns("/profile/adm/**");
+        bean.addUrlPatterns("/articleLike/**");
+        bean.addUrlPatterns("/articleLike/*");
         bean.addUrlPatterns("/emailHistory/adm/**");
         bean.addUrlPatterns("/article/adm/**");
         bean.addUrlPatterns("/category/adm/**");
         bean.addUrlPatterns("/region/adm/**");
 
         return bean;
-    }*/
+    }
 }

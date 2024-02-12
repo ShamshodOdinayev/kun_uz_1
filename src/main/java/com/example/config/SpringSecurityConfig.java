@@ -4,26 +4,18 @@ import com.example.util.MD5Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.authentication.AuthenticationProvider;
-import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
-import org.springframework.security.config.Customizer;
-import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.web.SecurityFilterChain;
 
 import java.util.Objects;
 
-@Configuration
-public class SpringSecurityConfig {
+//@Configuration
+public class SpringSecurityConfig {}/*{
     @Autowired
     private UserDetailsService userDetailsService;
 
     @Bean
     public AuthenticationProvider authenticationProvider() {
         // authentication
-    /*    String password = "f913972a-9d3a-490c-ae4d-e47d281050da";
+    *//*    String password = "f913972a-9d3a-490c-ae4d-e47d281050da";
         System.out.println("User Pasword mazgi: " + password);
 
         UserDetails user = User.builder()
@@ -34,7 +26,7 @@ public class SpringSecurityConfig {
 
         final DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
         authenticationProvider.setUserDetailsService(new InMemoryUserDetailsManager(user));
-        return authenticationProvider;*/
+        return authenticationProvider;*//*
         final DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
         authenticationProvider.setUserDetailsService(userDetailsService);
         authenticationProvider.setPasswordEncoder(passwordEncoder());
@@ -76,4 +68,4 @@ public class SpringSecurityConfig {
     }
 
 
-}
+}*/
