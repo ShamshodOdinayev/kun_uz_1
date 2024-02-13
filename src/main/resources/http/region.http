@@ -1,7 +1,7 @@
 ### Create region
 POST localhost:8080/region
 Content-Type: application/json
-Authorization: Basic dXNlcjpmOTEzOTcyYS05ZDNhLTQ5MGMtYWU0ZC1lNDdkMjgxMDUwZGE=
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MDc4NDIxNTEsImVtYWlsIjoiYWRtaW5AbWFpbC5ydSIsInJvbGUiOiJST0xFX0FETUlOIiwiZXhwIjoxNzA3OTI4NTUxLCJpc3MiOiJLdW5VelRlc3QifQ.Q_xP3pvtO8EvU1ARXKOv028j1PIrOc-qNrJjilYJV3HHreu7V2VJdJdzLNLq3KnYm_oNNm8Syo7FYjRKlm2Xbw
 
 {
   "orderNumber": 5,

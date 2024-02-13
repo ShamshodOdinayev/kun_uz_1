@@ -1,11 +1,13 @@
 package com.example.service;
 
+import com.example.config.CustomUserDetails;
 import com.example.dto.*;
 import com.example.entity.ProfileEntity;
 import com.example.exp.AppBadException;
 import com.example.repository.ProfileCustomRepository;
 import com.example.repository.ProfileRepository;
 import com.example.util.JWTUtil;
+import com.example.util.SpringSecurityUtil;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -86,9 +88,9 @@ public class ProfileService {
         return entityUpdate(dto, entity);
     }
 
-    public ProfileDTO update(CreateProfileDTO dto, String jwt) {
-        JwtDTO jwtDTO = JWTUtil.decode(jwt);
-        ProfileEntity entity = get(jwtDTO.getId());
+    public ProfileDTO update(CreateProfileDTO dto) {
+        CustomUserDetails currentUser = SpringSecurityUtil.getCurrentUser();
+        ProfileEntity entity = get(currentUser.getId());
         return entityUpdate(dto, entity);
     }
 

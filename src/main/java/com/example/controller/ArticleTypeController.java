@@ -8,6 +8,7 @@ import com.example.service.ArticleTypeService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -24,12 +25,14 @@ public class ArticleTypeController {
     }
 
     @PostMapping("")
+    @PreAuthorize("hasAnyRole('ADMIN','MODERATOR')")
     public ResponseEntity<Boolean> create(@RequestBody ArticleTypeCrudeDTO dto) {
         log.warn("Article type create {}", dto.getOrderNumber());
         return ResponseEntity.ok(articleTypeService.create(dto));
     }
 
     @PostMapping("/{id}")
+    @PreAuthorize("hasAnyRole('ADMIN','MODERATOR','PUBLISHER')")
     public ResponseEntity<ArticleTypeDTO> updateById(@PathVariable(value = "id") Integer id,
                                                      @RequestBody ArticleTypeCrudeDTO dto) {
         log.warn("Article type update {}", id);
@@ -37,6 +40,7 @@ public class ArticleTypeController {
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasAnyRole('ADMIN','MODERATOR','PUBLISHER')")
     public ResponseEntity<Boolean> deleteById(@PathVariable Integer id) {
         log.warn("Article delete {}", id);
         return ResponseEntity.ok(articleTypeService.deleteById(id));

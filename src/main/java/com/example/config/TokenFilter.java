@@ -14,6 +14,7 @@ import org.springframework.web.filter.GenericFilterBean;
 
 import java.io.IOException;
 
+/*
 @Component
 public class TokenFilter extends GenericFilterBean {
 
@@ -32,7 +33,7 @@ public class TokenFilter extends GenericFilterBean {
         String token = authHeader.substring(7);
         JwtDTO jwtDto;
         try {
-            jwtDto = JWTUtil.decode(token);
+            jwtDto = JWTUtil.decodeForSpringSecurity(token);
         } catch (JwtException e) {
             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
             response.setHeader("Message", "Token Not Valid");
@@ -44,3 +45,4 @@ public class TokenFilter extends GenericFilterBean {
     }
 }
 
+*/

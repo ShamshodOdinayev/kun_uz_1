@@ -25,7 +25,9 @@ public class SpringSecurityConfig {
     private JwtTokenFilter jwtTokenFilter;
     public static final String[] AUTH_WHITELIST = {
             "/auth/**",
+            "/auth/*",
             "/init/**",
+            "/init/*",
             "/region/lang",
             "/init/admin",
             "/v2/api-docs",
@@ -68,8 +70,6 @@ public class SpringSecurityConfig {
         http.authorizeHttpRequests(authorizationManagerRequestMatcherRegistry -> {
             authorizationManagerRequestMatcherRegistry
                     .requestMatchers(AUTH_WHITELIST).permitAll()
-                    .requestMatchers("/region/adm/**").hasRole("ADMIN")
-                    .requestMatchers("/profile/adm/*").hasRole("ADMIN")
                     .anyRequest()
                     .authenticated();
         });

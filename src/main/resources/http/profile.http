@@ -1,14 +1,14 @@
 ### Create profile
 POST localhost:8080/profile
 Content-Type: application/json
-Authorization: eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MDcyMjY2NjYsImlkIjoxLCJyb2xlIjoiQURNSU4iLCJleHAiOjE3MDczMTMwNjYsImlzcyI6Ikt1blV6VGVzdCJ9.G45H_A8Az3OM3bwr6rY6tASJk5biq1Q313h8OTiTd2ZxMPuay2s60z3lOfoQHMBPGRu5XRaADIQbiaocEVpMHg
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MDc4NDA1NjQsImVtYWlsIjoiYWRtaW5AbWFpbC5ydSIsInJvbGUiOiJST0xFX0FETUlOIiwiZXhwIjoxNzA3OTI2OTY0LCJpc3MiOiJLdW5VelRlc3QifQ.JsjNZAYE7lA_9U-AENWXcKfROX8axPhca8ZPiSoR2mKJFXudEQQhYuxyLL-D0qTmLqZHGLM7Q19nMzSXYD2AYg
 
 {
   "name": "Shamshod",
   "surName": "Odinayev",
   "password": "Shamshod123",
-  "email": "sho112d@mail.rusd",
-  "role": "MODERATOR",
+  "email": "shovv112d@gmail.com",
+  "role": "ROLE_PUBLISHER",
   "status": "ACTIVE"
 }
 

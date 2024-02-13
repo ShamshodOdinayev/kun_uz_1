@@ -13,6 +13,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -29,6 +30,7 @@ public class CategoryController {
     }
 
     @PostMapping("/adm")
+    @PreAuthorize("hasAnyRole('ADMIN','MODERATOR','PUBLISHER')")
     public ResponseEntity<CategoryCreateDTO> create(@RequestBody CategoryCreateDTO dto,
                                                     HttpServletRequest request) {
         HttpRequestUtil.getProfileId(request, ProfileRole.ROLE_ADMIN);
@@ -37,6 +39,7 @@ public class CategoryController {
     }
 
     @PutMapping("/{id}")
+    @PreAuthorize("hasAnyRole('ADMIN','MODERATOR','PUBLISHER')")
     public ResponseEntity<?> updateById(@PathVariable Integer id,
                                         @RequestBody CategoryCreateDTO dto,
                                         @RequestHeader(value = "Authorization") String jwt) {
@@ -45,6 +48,7 @@ public class CategoryController {
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasAnyRole('ADMIN','MODERATOR','PUBLISHER')")
     public ResponseEntity<Boolean> deleteById(@PathVariable Integer id,
                                               @RequestHeader(value = "Authorization") String jwt) {
         log.warn("Category delete {}", id);

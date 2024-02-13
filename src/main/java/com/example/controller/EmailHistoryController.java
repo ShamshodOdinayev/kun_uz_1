@@ -4,11 +4,13 @@ import com.example.dto.EmailSendHistoryDTO;
 import com.example.enums.ProfileRole;
 import com.example.service.EmailSendHistoryService;
 import com.example.util.HttpRequestUtil;
+import com.example.util.SpringSecurityUtil;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
@@ -23,17 +25,17 @@ public class EmailHistoryController {
     private EmailSendHistoryService emailSendHistoryServices;
 
     @GetMapping("/adm/email/{email}")
-    public ResponseEntity<List<EmailSendHistoryDTO>> get(@PathVariable String email,
-                                                         HttpServletRequest request) {
-        Integer profileId = HttpRequestUtil.getProfileId(request, ProfileRole.ROLE_ADMIN);
+    @PreAuthorize("hasAnyRole('ADMIN')")
+    public ResponseEntity<List<EmailSendHistoryDTO>> get(@PathVariable String email) {
+        Integer profileId = SpringSecurityUtil.getCurrentUser().getId();
         log.warn("Email history get {} {}", profileId, email);
         return ResponseEntity.ok(emailSendHistoryServices.get(email));
     }
 
     @GetMapping("/adm/date/{date}")
-    public ResponseEntity<List<EmailSendHistoryDTO>> getByGiven(@PathVariable LocalDate date,
-                                                                HttpServletRequest request) {
-        Integer profileId = HttpRequestUtil.getProfileId(request, ProfileRole.ROLE_ADMIN);
+    @PreAuthorize("hasAnyRole('ADMIN')")
+    public ResponseEntity<List<EmailSendHistoryDTO>> getByGiven(@PathVariable LocalDate date) {
+        Integer profileId = SpringSecurityUtil.getCurrentUser().getId();
         log.warn("get By Given {} {}", date, profileId);
         return ResponseEntity.ok(emailSendHistoryServices.getByGiven(date));
     }

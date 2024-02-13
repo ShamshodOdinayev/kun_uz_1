@@ -33,6 +33,7 @@ public class ArticleController {
     }
 
     @PutMapping("/adm/{id}")
+    @PreAuthorize("hasAnyRole('ADMIN','MODERATOR','PUBLISHER')")
     public ResponseEntity<ArticleDTO> update(@RequestBody ArticleCreateDTO dto,
                                              @PathVariable String id) {
         log.warn("Article update id {} ", id);
@@ -40,12 +41,14 @@ public class ArticleController {
     }
 
     @DeleteMapping("/adm/{id}")
+    @PreAuthorize("hasAnyRole('ADMIN','MODERATOR','PUBLISHER')")
     public ResponseEntity<Boolean> deleteById(@PathVariable String id) {
         log.warn("Article delete id {} ", id);
         return ResponseEntity.ok(articleService.deleteById(id));
     }
 
     @PutMapping("/adm/changeStatus/{id}")
+    @PreAuthorize("hasAnyRole('ADMIN','PUBLISHER')")
     public ResponseEntity<Integer> changeStatusById(@PathVariable String id) {
         log.warn("change status id {}", id);
         return ResponseEntity.ok(articleService.changeStatusById(id));
