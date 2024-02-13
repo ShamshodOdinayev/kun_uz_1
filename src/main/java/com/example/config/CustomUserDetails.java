@@ -2,13 +2,19 @@ package com.example.config;
 
 import com.example.enums.ProfileRole;
 import com.example.enums.ProfileStatus;
+import lombok.Getter;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
 
-public class CustomUserDetails {}/*implements UserDetails {
+public class CustomUserDetails implements UserDetails {
+    @Getter
     private Integer id;
+    @Getter
     private String email;
     private String password;
     private ProfileStatus status;
@@ -58,4 +64,4 @@ public class CustomUserDetails {}/*implements UserDetails {
     public boolean isEnabled() {
         return status.equals(ProfileStatus.ACTIVE);
     }
-}*/
+}

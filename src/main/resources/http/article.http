@@ -1,13 +1,13 @@
 ### Create
 POST localhost:8080/article/adm
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MDc3MzE2MjYsImlkIjoxLCJyb2xlIjoiQURNSU4iLCJleHAiOjE3MDc4MTgwMjYsImlzcyI6Ikt1blV6VGVzdCJ9.5Gi_1WUrnvDgE5zHBY0k4-GLLlkK4JAPYTku6os7Y3Y75HBugZL8ZIk0mnF6KlHIDasXTVrTSC6UopQ9669U0w
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MDc3NTQ2MjIsImVtYWlsIjoiYWRtaW5AbWFpbC5ydSIsInJvbGUiOiJST0xFX0FETUlOIiwiZXhwIjoxNzA3ODQxMDIyLCJpc3MiOiJLdW5VelRlc3QifQ.9w3C7En9Nqpg3KDEaajhLP8FB2nedIUicL2lTtzbDmqPdD60QCQLUPhiTKsPYiP4qAL39tC548KGX19M75Nzag
 
 {
-  "title": "title1",
-  "description": "d1",
+  "title": "title12",
+  "description": "d12",
   "articleType": [
-    2,
+    1,
     4
   ],
   "categoryId": 1,
@@ -62,3 +62,4 @@ GET localhost:8080/article/getMostRead?size=2
 
 ### Get article type and region
 GET localhost:8080/article/getTypeAndByRegion?typeId=2&regionId=2
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MDc3NTQ2MjIsImVtYWlsIjoiYWRtaW5AbWFpbC5ydSIsInJvbGUiOiJST0xFX0FETUlOIiwiZXhwIjoxNzA3ODQxMDIyLCJpc3MiOiJLdW5VelRlc3QifQ.9w3C7En9Nqpg3KDEaajhLP8FB2nedIUicL2lTtzbDmqPdD60QCQLUPhiTKsPYiP4qAL39tC548KGX19M75Nzag

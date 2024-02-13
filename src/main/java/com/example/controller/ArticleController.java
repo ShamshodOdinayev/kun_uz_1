@@ -5,11 +5,13 @@ import com.example.dto.ArticleDTO;
 import com.example.dto.ArticleShortInfoDTO;
 import com.example.dto.GetTheLastArticleNotListedDTO;
 import com.example.service.ArticleService;
+import com.example.util.SpringSecurityUtil;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -23,16 +25,16 @@ public class ArticleController {
     private ArticleService articleService;
 
     @PostMapping("/adm")
-    public ResponseEntity<ArticleDTO> create(@RequestBody ArticleCreateDTO dto,
-                                             HttpServletRequest request) {
+//    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasAnyRole('ADMIN','MODERATOR')")
+    public ResponseEntity<ArticleDTO> create(@RequestBody ArticleCreateDTO dto) {
         log.warn("Article create");
-        return ResponseEntity.ok(articleService.create(dto, 2));
+        return ResponseEntity.ok(articleService.create(dto, SpringSecurityUtil.getCurrentUser().getId()));
     }
 
     @PutMapping("/adm/{id}")
     public ResponseEntity<ArticleDTO> update(@RequestBody ArticleCreateDTO dto,
-                                             @PathVariable String id,
-                                             HttpServletRequest request) {
+                                             @PathVariable String id) {
         log.warn("Article update id {} ", id);
         return ResponseEntity.ok(articleService.updateById(dto, id));
     }

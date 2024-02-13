@@ -25,7 +25,7 @@ public class EmailHistoryController {
     @GetMapping("/adm/email/{email}")
     public ResponseEntity<List<EmailSendHistoryDTO>> get(@PathVariable String email,
                                                          HttpServletRequest request) {
-        Integer profileId = HttpRequestUtil.getProfileId(request, ProfileRole.ADMIN);
+        Integer profileId = HttpRequestUtil.getProfileId(request, ProfileRole.ROLE_ADMIN);
         log.warn("Email history get {} {}", profileId, email);
         return ResponseEntity.ok(emailSendHistoryServices.get(email));
     }
@@ -33,7 +33,7 @@ public class EmailHistoryController {
     @GetMapping("/adm/date/{date}")
     public ResponseEntity<List<EmailSendHistoryDTO>> getByGiven(@PathVariable LocalDate date,
                                                                 HttpServletRequest request) {
-        Integer profileId = HttpRequestUtil.getProfileId(request, ProfileRole.ADMIN);
+        Integer profileId = HttpRequestUtil.getProfileId(request, ProfileRole.ROLE_ADMIN);
         log.warn("get By Given {} {}", date, profileId);
         return ResponseEntity.ok(emailSendHistoryServices.getByGiven(date));
     }

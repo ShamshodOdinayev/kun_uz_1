@@ -7,13 +7,13 @@ Content-Type: application/json
   "password": "12345"
 }
 
-### Registration
+### Registration emailga xabar junatadi
 POST localhost:8080/auth/registration
 Content-Type: application/json
 
 {
-  "name": "regis1",
-  "surname": "regis1",
-  "email": "shamshododi1nayev1702@gmail.com",
-  "password": "aefafAWERWE3223FDg3w23"
+  "name": "regis1ff",
+  "surname": "regifs1",
+  "email": "shamshod6696odinayev@gmail.com",
+  "password": "aefafAWERrytWE3223FDg3w23"
 }

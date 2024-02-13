@@ -16,6 +16,9 @@ public class CommentEntity extends BaseEntity {
     private Integer profileId;
     @Column(name = "content", columnDefinition = "TEXT")
     private String content;
+    @ManyToOne
+    @JoinColumn(name = "reply_id", insertable = false, updatable = false)
+    private CommentEntity replyComment;
     @Column(name = "reply_id")
     private Integer replyId;
     @ManyToOne

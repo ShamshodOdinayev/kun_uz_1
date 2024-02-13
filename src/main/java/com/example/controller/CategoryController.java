@@ -10,7 +10,6 @@ import com.example.util.HttpRequestUtil;
 import com.example.util.JWTUtil;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletRequest;
-import jdk.jshell.Snippet;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -32,7 +31,7 @@ public class CategoryController {
     @PostMapping("/adm")
     public ResponseEntity<CategoryCreateDTO> create(@RequestBody CategoryCreateDTO dto,
                                                     HttpServletRequest request) {
-        HttpRequestUtil.getProfileId(request, ProfileRole.ADMIN);
+        HttpRequestUtil.getProfileId(request, ProfileRole.ROLE_ADMIN);
         log.warn("Category create");
         return ResponseEntity.ok(categoryService.create(dto));
     }

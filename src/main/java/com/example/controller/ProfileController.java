@@ -66,7 +66,7 @@ public class ProfileController {
                                                        @RequestParam(value = "page", defaultValue = "1") Integer page,
                                                        @RequestParam(value = "size", defaultValue = "5") Integer size,
                                                        HttpServletRequest request) {
-        Integer profileId = HttpRequestUtil.getProfileId(request, ProfileRole.ADMIN);
+        Integer profileId = HttpRequestUtil.getProfileId(request, ProfileRole.ROLE_ADMIN);
         log.warn("filter{}", profileId);
         return ResponseEntity.ok(profileService.filter(dto, page - 1, size));
     }

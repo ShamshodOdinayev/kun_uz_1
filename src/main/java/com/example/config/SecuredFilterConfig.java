@@ -7,15 +7,15 @@ import org.springframework.context.annotation.Configuration;
 import jakarta.servlet.Filter;
 
 
-@Configuration
+//@Configuration
 public class SecuredFilterConfig {
-    @Autowired
-    private TokenFilter tokenFilter;
+ /*   @Autowired
+    private TokenFilter tokenFilter;*/
 
     @Bean
     public FilterRegistrationBean<Filter> filterRegistrationBean() {
         FilterRegistrationBean<Filter> bean = new FilterRegistrationBean<>();
-        bean.setFilter(tokenFilter);
+//        bean.setFilter(tokenFilter);
         bean.addUrlPatterns("/profile/adm");
         bean.addUrlPatterns("/emailHistory/adm");
         bean.addUrlPatterns("/article/adm");
