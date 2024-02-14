@@ -12,7 +12,7 @@ public class SecuredFilterConfig {
  /*   @Autowired
     private TokenFilter tokenFilter;*/
 
-    @Bean
+//    @Bean
     public FilterRegistrationBean<Filter> filterRegistrationBean() {
         FilterRegistrationBean<Filter> bean = new FilterRegistrationBean<>();
 //        bean.setFilter(tokenFilter);

@@ -76,16 +76,16 @@ public class AuthService {
         /**
          * sms yuborish
          **/
-        String code = RandomUtil.getRandomSmsCode();
-        smsServerService.send(dto.getPhone(), "KunuzTest verification code: ", code);
+       /* String code = RandomUtil.getRandomSmsCode();
+        smsServerService.send(dto.getPhone(), "KunuzTest verification code: ", code);*/
 
         /**
          * emailga xabar yuborish
          **/
-//        String jwt = JWTUtil.encodeForEmail(entity.getId());
-//        String message = getMessage(entity, jwt);
-//        emailSendHistoryService.saveHistory(message, dto.getEmail(), entity);
-//        mailSenderService.sendEmail(dto.getEmail(), "Registration", message);
+        String jwt = JWTUtil.encodeForEmail(entity.getId());
+        String message = getMessage(entity, jwt);
+        emailSendHistoryService.saveHistory(message, dto.getEmail(), entity);
+        mailSenderService.sendEmail(dto.getEmail(), "Registration", message);
         return "A code has been sent to the user's email";
     }
 

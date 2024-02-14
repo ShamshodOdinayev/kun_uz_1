@@ -2,9 +2,11 @@ package com.example.service;
 
 import com.example.dto.CommentCreateDTO;
 import com.example.dto.CommentDTO;
+import com.example.dto.CommentUpdateDTO;
 import com.example.entity.CommentEntity;
 import com.example.exp.AppBadException;
 import com.example.repository.CommentRepository;
+import com.example.util.SpringSecurityUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -30,7 +32,7 @@ public class CommentService {
         return toDTO(entity);
     }
 
-    private static CommentDTO toDTO(CommentEntity entity) {
+    private CommentDTO toDTO(CommentEntity entity) {
         CommentDTO commentDTO = new CommentDTO();
         commentDTO.setId(entity.getId());
         commentDTO.setContent(entity.getContent());
@@ -41,7 +43,7 @@ public class CommentService {
         return commentDTO;
     }
 
-    private static CommentEntity CommentCreateDTOtoEntity(CommentCreateDTO dto, Integer profileId) {
+    private CommentEntity CommentCreateDTOtoEntity(CommentCreateDTO dto, Integer profileId) {
         CommentEntity entity = new CommentEntity();
         entity.setContent(dto.getContent());
         entity.setProfileId(profileId);
@@ -49,5 +51,22 @@ public class CommentService {
         entity.setArticleId(dto.getArticleId());
         entity.setArticleId(dto.getArticleId());
         return entity;
+    }
+
+    public CommentDTO update(CommentUpdateDTO dto, Integer id) {
+        Optional<CommentEntity> commentEntityOptional = commentRepository.findByIdAndVisible(id, true);
+        if (commentEntityOptional.isEmpty()) {
+            throw new AppBadException("Comment not found");
+        }
+        Integer profileId = SpringSecurityUtil.getCurrentUser().getId();
+        CommentEntity entity = commentEntityOptional.get();
+        if (!entity.getProfileId().equals(profileId)) {
+            throw new AppBadException("Has no such right");
+        }
+        entity.setContent(dto.getContent() != null ? dto.getContent() : entity.getContent());
+        entity.setReplyId(dto.getReplyId() != null ? dto.getReplyId() : entity.getReplyId());
+        entity.setArticleId(dto.getArticleId() != null ? dto.getArticleId() : entity.getArticleId());
+        commentRepository.save(entity);
+        return toDTO(entity);
     }
 }

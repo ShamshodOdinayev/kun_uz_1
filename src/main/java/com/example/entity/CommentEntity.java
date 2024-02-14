@@ -19,6 +19,9 @@ public class CommentEntity extends BaseEntity {
     @ManyToOne
     @JoinColumn(name = "reply_id", insertable = false, updatable = false)
     private CommentEntity replyComment;
+    @ManyToOne
+    @JoinColumn(name = "reply_id", insertable = false, updatable = false)
+    private CommentEntity reply;
     @Column(name = "reply_id")
     private Integer replyId;
     @ManyToOne

@@ -3,8 +3,8 @@ POST localhost:8080/auth/login
 Content-Type: application/json
 
 {
-  "email": "sho112d@mail.rusd",
-  "password": "Shamshod123"
+  "email": "admin@mail.ru",
+  "password": "12345"
 }
 
 ### Registration emailga xabar junatadi
@@ -14,6 +14,6 @@ Content-Type: application/json
 {
   "name": "regis1ff",
   "surname": "regifs1",
-  "email": "shamshod1702odinayev@gmail.com",
+  "email": "shamshododinayev1702@gmail.com",
   "password": "Shamshod1702"
 }

@@ -1,10 +1,18 @@
 ### Coomet create
 POST localhost:8080/comment
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MDc3MzEwMjEsImlkIjoxLCJyb2xlIjoiQURNSU4iLCJleHAiOjE3MDc4MTc0MjEsImlzcyI6Ikt1blV6VGVzdCJ9.TopDEoa2WwC4MvVwRXHPj2vbYhshpNvwHCDZxziTSKGtKqVAyCmwXYBtgVv3tcMpOPoh04PHqiseXlXNC-IEoQ
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MDc5MTc4OTEsImVtYWlsIjoic2hhbXNob2RvZGluYXlldjE3MDJAZ21haWwuY29tIiwicm9sZSI6IlJPTEVfVVNFUiIsImV4cCI6MTcwODAwNDI5MSwiaXNzIjoiS3VuVXpUZXN0In0.oEK-ldR3yXn7ojLOe6fiB4mukfllo4hIycmlA0Yl2L99o_LsnQZiyYidf1g_cK7FDguyA1BNBGKHYyaPzyRQqA
 
 {
-  "content": "Daxshat",
-  "articleId": "59fbafed-86f0-4c20-88cb-0c47dd1bd94e",
-  "replyId": 1
+  "content": "555",
+  "articleId": "59fbafed-86f0-4c20-88cb-0c47dd1bd94e"
+}
+
+### Comment update
+PUT localhost:8080/comment/3
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MDc5MTQ3NDYsImVtYWlsIjoic2hhbXNob2RvZGluYXlldjE3MDJAZ21haWwuY29tIiwicm9sZSI6IlJPTEVfVVNFUiIsImV4cCI6MTcwODAwMTE0NiwiaXNzIjoiS3VuVXpUZXN0In0.gvKoF5Aq67yPObPV45BJe7EHzL4Pc6ypT42ETCpID-XBYcY1kRiwocdiw1Sc_jKTZp0ZWI40OLbv353hmxCL5g
+
+{
+  "content": "Yaxshi"
 }

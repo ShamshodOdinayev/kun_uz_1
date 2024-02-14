@@ -2,17 +2,14 @@ package com.example.controller;
 
 import com.example.dto.CommentCreateDTO;
 import com.example.dto.CommentDTO;
+import com.example.dto.CommentUpdateDTO;
 import com.example.service.CommentService;
-import com.example.util.HttpRequestUtil;
+import com.example.util.SpringSecurityUtil;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @Slf4j
 @Tag(name = "Comment API list")
@@ -23,11 +20,17 @@ public class CommentController {
     private CommentService commentService;
 
     @PostMapping("")
-    public ResponseEntity<CommentDTO> create(@RequestBody CommentCreateDTO dto,
-                                             HttpServletRequest request) {
-        Integer profileId = HttpRequestUtil.getProfileId(request);
-        log.info("Comment create{}", profileId);
-        return ResponseEntity.ok(commentService.create(dto, profileId));
+    public ResponseEntity<CommentDTO> create(@RequestBody CommentCreateDTO dto) {
+        Integer id = SpringSecurityUtil.getCurrentUser().getId();
+        System.out.println(id);
+        log.info("Comment create{}", id);
+        return ResponseEntity.ok(commentService.create(dto, id));
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<CommentDTO> updateById(@RequestBody CommentUpdateDTO dto,
+                                                 @PathVariable Integer id) {
+        return ResponseEntity.ok(commentService.update(dto, id));
     }
 
 }
