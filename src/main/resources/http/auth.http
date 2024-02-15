@@ -1,6 +1,7 @@
 ### Login
 POST localhost:8080/auth/login
 Content-Type: application/json
+Accept-Language: ru
 
 {
   "email": "admin@mail.ru",

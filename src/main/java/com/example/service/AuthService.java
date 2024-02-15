@@ -5,6 +5,7 @@ import com.example.dto.JwtDTO;
 import com.example.dto.ProfileDTO;
 import com.example.dto.RegistrationDTO;
 import com.example.entity.ProfileEntity;
+import com.example.enums.AppLanguage;
 import com.example.enums.ProfileRole;
 import com.example.enums.ProfileStatus;
 import com.example.exp.AppBadException;
@@ -14,9 +15,12 @@ import com.example.util.JWTUtil;
 import com.example.util.MD5Util;
 import com.example.util.RandomUtil;
 import io.jsonwebtoken.JwtException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.Locale;
 import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -28,6 +32,9 @@ public class AuthService {
     private final EmailSendHistoryRepository emailSendHistoryRepository;
     private final EmailSendHistoryService emailSendHistoryService;
     private final SmsServerService smsServerService;
+    @Autowired
+    private ResourceBundleMessageSourceService resourceBundleMessageSourceService;
+
 
     public AuthService(ProfileRepository profileRepository, MailSenderService mailSenderService, EmailSendHistoryService emailSendHistoryService, EmailSendHistoryRepository emailSendHistoryRepository, SmsServerService smsServerService) {
         this.profileRepository = profileRepository;
@@ -37,11 +44,11 @@ public class AuthService {
         this.smsServerService = smsServerService;
     }
 
-    public ProfileDTO auth(AuthDTO profile) { // login
+    public ProfileDTO auth(AuthDTO profile, AppLanguage language) {
         Optional<ProfileEntity> optional = profileRepository.findByEmailAndPassword(profile.getEmail(),
                 MD5Util.encode(profile.getPassword()));
         if (optional.isEmpty()) {
-            throw new AppBadException("Email or Password is wrong");
+            throw new AppBadException(resourceBundleMessageSourceService.getMessage("email.password.wrong", language));
         }
         if (!optional.get().getStatus().equals(ProfileStatus.ACTIVE)) {
             throw new AppBadException("Profile not active");

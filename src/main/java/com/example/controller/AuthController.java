@@ -3,11 +3,13 @@ package com.example.controller;
 import com.example.dto.AuthDTO;
 import com.example.dto.ProfileDTO;
 import com.example.dto.RegistrationDTO;
+import com.example.enums.AppLanguage;
 import com.example.service.AuthService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,9 +23,10 @@ public class AuthController {
 
     @PostMapping("/login")
     @Operation(summary = "Api for login", description = "this api used for authorization")
-    public ResponseEntity<ProfileDTO> login(@RequestBody AuthDTO dto) {
+    public ResponseEntity<ProfileDTO> login(@RequestBody AuthDTO dto,
+                                            @RequestHeader(value = "Accept-Language", defaultValue = "uz") AppLanguage language) {
         log.warn("Login {} ", dto.getEmail());
-        return ResponseEntity.ok(authService.auth(dto));
+        return ResponseEntity.ok(authService.auth(dto, language));
     }
 
     @PostMapping("/registration")
