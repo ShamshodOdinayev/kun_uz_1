@@ -1,8 +1,7 @@
 package com.example.dto;
 
-import com.example.enums.ArticleLikeStatus;
+import com.example.enums.LikeStatus;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import jakarta.persistence.Column;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -15,7 +14,7 @@ public class ArticleLikeDTO {
     private Integer id;
     private Integer profileId;
     private String articleId;
-    private ArticleLikeStatus status;
+    private LikeStatus status;
     private LocalDateTime createdDate = LocalDateTime.now();
     private LocalDateTime updatedDate;
     private Boolean visible = true;

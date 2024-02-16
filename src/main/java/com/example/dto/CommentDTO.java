@@ -16,6 +16,7 @@ public class CommentDTO {
     private LocalDateTime updatedDate;
     private Boolean visible;
     private Integer profileId;
+    private ProfileDTO profile;
     private String content;
     private String articleId;
     private Integer replyId;

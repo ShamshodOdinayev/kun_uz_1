@@ -8,18 +8,18 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-@Table(name = "article_like")
-public class ArticleLikeEntity extends BaseEntity {
+@Table(name = "comment_like")
+public class CommentLikeEntity extends BaseEntity {
     @Column(name = "profile_id")
     private Integer profileId;
     @ManyToOne
     @JoinColumn(name = "profile_id", insertable = false, updatable = false)
     private ProfileEntity profile;
-    @Column(name = "article_id")
-    private String articleId;
+    @Column(name = "comment_id")
+    private Integer commentId;
     @ManyToOne
-    @JoinColumn(name = "article_id", insertable = false, updatable = false)
-    private ArticleEntity article;
+    @JoinColumn(name = "comment_id", insertable = false, updatable = false)
+    private CommentEntity comment;
     @Column(name = "status")
     @Enumerated(EnumType.STRING)
     private LikeStatus status;

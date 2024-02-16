@@ -1,4 +1,4 @@
-### Login
+### Login admin
 POST localhost:8080/auth/login
 Content-Type: application/json
 Accept-Language: ru
@@ -6,6 +6,16 @@ Accept-Language: ru
 {
   "email": "admin@mail.ru",
   "password": "12345"
+}
+
+### login user
+POST localhost:8080/auth/login
+Content-Type: application/json
+Accept-Language: ru
+
+{
+  "email": "shamshododinayev1702@gmail.com",
+  "password": "Shamshod1702"
 }
 
 ### Registration emailga xabar junatadi

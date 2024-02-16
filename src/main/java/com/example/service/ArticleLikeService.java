@@ -1,9 +1,10 @@
 package com.example.service;
 
 import com.example.entity.ArticleLikeEntity;
-import com.example.enums.ArticleLikeStatus;
+import com.example.enums.LikeStatus;
 import com.example.exp.AppBadException;
 import com.example.repository.ArticleLikeRepository;
+import com.example.util.SpringSecurityUtil;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -16,31 +17,34 @@ public class ArticleLikeService {
         this.articleLikeRepository = articleLikeRepository;
     }
 
-    public Boolean create(String articleId, Integer profileId) {
+    public Boolean like(String articleId) {
+        Integer profileId = SpringSecurityUtil.getCurrentUser().getId();
         Optional<ArticleLikeEntity> byArticleIdAndProfileId = articleLikeRepository.findByArticleIdAndProfileId(articleId, profileId);
         if (byArticleIdAndProfileId.isPresent()) {
             return true;
         }
         ArticleLikeEntity entity = new ArticleLikeEntity();
         entity.setArticleId(articleId);
-        entity.setStatus(ArticleLikeStatus.LIKE);
+        entity.setStatus(LikeStatus.LIKE);
         entity.setProfileId(profileId);
         articleLikeRepository.save(entity);
         return true;
     }
 
-    public Boolean dislike(String articleId, Integer profileId) {
+    public Boolean dislike(String articleId) {
+        Integer profileId = SpringSecurityUtil.getCurrentUser().getId();
         Optional<ArticleLikeEntity> byArticleIdAndProfileId = articleLikeRepository.findByArticleIdAndProfileId(articleId, profileId);
         if (byArticleIdAndProfileId.isEmpty()) {
             throw new AppBadException("like not found");
         }
         ArticleLikeEntity entity = byArticleIdAndProfileId.get();
-        entity.setStatus(ArticleLikeStatus.DISLIKE);
+        entity.setStatus(LikeStatus.DISLIKE);
         articleLikeRepository.save(entity);
         return true;
     }
 
-    public Boolean remove(String articleId, Integer profileId) {
+    public Boolean remove(String articleId) {
+        Integer profileId = SpringSecurityUtil.getCurrentUser().getId();
         Optional<ArticleLikeEntity> allByArticleIdAndProfileId = articleLikeRepository.findByArticleIdAndProfileId(articleId, profileId);
         if (allByArticleIdAndProfileId.isEmpty()) {
             throw new AppBadException("Article not found");

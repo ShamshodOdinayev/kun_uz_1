@@ -16,3 +16,23 @@ Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MDc5MTQ3NDYsImVtYWlsIjoic
 {
   "content": "Yaxshi"
 }
+
+### Delete comment
+DELETE localhost:8080/comment/3
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MDgwMDA5NjEsImVtYWlsIjoic2hhbXNob2RvZGluYXlldjE3MDJAZ21haWwuY29tIiwicm9sZSI6IlJPTEVfVVNFUiIsImV4cCI6MTcwODA4NzM2MSwiaXNzIjoiS3VuVXpUZXN0In0.YP6UyU_jP2zJpA54TxibMROWk1wQKJ_hmHe_8RPrnsSRIMvlE5gqXn1pqNWbXrLNeE5_k39zj1PPCmgpjWiMYg
+
+### Get by articleId
+GET localhost:8080/comment/59fbafed-86f0-4c20-88cb-0c47dd1bd94e
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MDgwMDA5NjEsImVtYWlsIjoic2hhbXNob2RvZGluYXlldjE3MDJAZ21haWwuY29tIiwicm9sZSI6IlJPTEVfVVNFUiIsImV4cCI6MTcwODA4NzM2MSwiaXNzIjoiS3VuVXpUZXN0In0.YP6UyU_jP2zJpA54TxibMROWk1wQKJ_hmHe_8RPrnsSRIMvlE5gqXn1pqNWbXrLNeE5_k39zj1PPCmgpjWiMYg
+
+### Comment filter
+POST localhost:8080/comment/filter?page=1&size=4
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MDgwMDYzMjAsImVtYWlsIjoiYWRtaW5AbWFpbC5ydSIsInJvbGUiOiJST0xFX0FETUlOIiwiZXhwIjoxNzA4MDkyNzIwLCJpc3MiOiJLdW5VelRlc3QifQ._pJY9JcK_J6N8KvkTXwJujjfKxl0PusWliiRGMrkhIJxzPQRRS1UpwwFX-kAuHs_MieVrQ3Z3RpiH3IGS6W7Dw
+
+{
+  "articleId": "59fbafed-86f0-4c20-88cb-0c47dd1bd94e",
+  "fromDate": "2024-02-14",
+  "profileId": 12,
+  "visible": true
+}

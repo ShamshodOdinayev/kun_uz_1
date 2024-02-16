@@ -18,6 +18,7 @@ public class CustomUserDetails implements UserDetails {
     private String email;
     private String password;
     private ProfileStatus status;
+    @Getter
     private ProfileRole role;
 
     public CustomUserDetails(Integer id, String email, String password, ProfileStatus status, ProfileRole role) {
