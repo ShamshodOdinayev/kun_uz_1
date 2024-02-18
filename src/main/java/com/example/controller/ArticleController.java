@@ -1,15 +1,13 @@
 package com.example.controller;
 
-import com.example.dto.ArticleCreateDTO;
-import com.example.dto.ArticleDTO;
-import com.example.dto.ArticleShortInfoDTO;
-import com.example.dto.GetTheLastArticleNotListedDTO;
+import com.example.dto.*;
 import com.example.service.ArticleService;
 import com.example.util.SpringSecurityUtil;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -25,7 +23,6 @@ public class ArticleController {
     private ArticleService articleService;
 
     @PostMapping("/adm")
-//    @PreAuthorize("hasRole('ADMIN')")
     @PreAuthorize("hasAnyRole('ADMIN','MODERATOR')")
     public ResponseEntity<ArticleDTO> create(@RequestBody ArticleCreateDTO dto) {
         log.warn("Article create");
@@ -90,6 +87,14 @@ public class ArticleController {
     public ResponseEntity<List<ArticleShortInfoDTO>> getTypeAndByRegion(@RequestParam(value = "typeId") Long typeId,
                                                                         @RequestParam(value = "regionId") Integer regionId) {
         return ResponseEntity.ok(articleService.getTypeAndByRegion(typeId, regionId));
+    }
+
+    @PostMapping("/filter")
+    @PreAuthorize("hasAnyRole('ADMIN')")
+    public ResponseEntity<PageImpl<ArticleShortInfoDTO>> filter(@RequestBody ArticleFilterDTO dto,
+                                                                @RequestParam(value = "page", defaultValue = "1") Integer page,
+                                                                @RequestParam(value = "size", defaultValue = "5") Integer size) {
+        return ResponseEntity.ok(articleService.filter(dto, page - 1, size));
     }
 
 

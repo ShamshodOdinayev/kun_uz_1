@@ -73,8 +73,6 @@ public class CommentCustomRepository {
         }
         List<CommentEntity> entityList = selectQuery.getResultList();
         Long totalElements = (Long) countQuery.getSingleResult();
-
-
         return new PaginationResultDTO<>(totalElements, entityList);
     }
 }

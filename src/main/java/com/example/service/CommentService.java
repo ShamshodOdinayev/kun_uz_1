@@ -10,9 +10,7 @@ import com.example.repository.CommentRepository;
 import com.example.util.SpringSecurityUtil;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 
 import java.util.LinkedList;
@@ -127,5 +125,18 @@ public class CommentService {
         }
         Pageable pageable = PageRequest.of(page, size);
         return new PageImpl<>(dtoList, pageable, paginationResultDTO.getTotalSize());
+    }
+
+    public PageImpl<CommentDTO> pagination(Integer page, Integer size) {
+        Sort sort = Sort.by(Sort.Direction.DESC, "createdDate");
+        Pageable pageable = PageRequest.of(page, size, sort);
+        Page<CommentEntity> courseEntityPage = commentRepository.findAll(pageable);
+        List<CommentEntity> courseEntityList = courseEntityPage.getContent();
+        long totalElements = courseEntityPage.getTotalElements();
+        List<CommentDTO> dtoList = new LinkedList<>();
+        for (CommentEntity courseEntity : courseEntityList) {
+            dtoList.add(entityToDTO(courseEntity));
+        }
+        return new PageImpl<>(dtoList, pageable, totalElements);
     }
 }

@@ -5,16 +5,19 @@ import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.PagingAndSortingRepository;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
-public interface CommentRepository extends CrudRepository<CommentEntity, Integer> {
+public interface CommentRepository extends CrudRepository<CommentEntity, Integer>, PagingAndSortingRepository<CommentEntity, Integer> {
     Optional<CommentEntity> findByIdAndVisible(Integer id, Boolean visible);
 
     @Transactional
     @Modifying
     @Query("update CommentEntity set visible=false where id=?1")
     void deleteById(Integer id);
+
     List<CommentEntity> findByArticleIdAndVisible(String articleId, Boolean visible);
 }

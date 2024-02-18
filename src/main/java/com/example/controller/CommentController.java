@@ -49,14 +49,19 @@ public class CommentController {
     }
 
     @PreAuthorize("hasAnyRole('ADMIN')")
+    @GetMapping("/pagination")
+    public ResponseEntity<PageImpl<CommentDTO>> pagination(@RequestParam(value = "page", defaultValue = "1") Integer page,
+                                                           @RequestParam(value = "size", defaultValue = "5") Integer size) {
+        return ResponseEntity.ok(commentService.pagination(page - 1, size));
+    }
+
+    @PreAuthorize("hasAnyRole('ADMIN')")
     @PostMapping("/filter")
     public ResponseEntity<PageImpl<CommentDTO>> filter(@RequestBody CommentFilterDTO dto,
                                                        @RequestParam(value = "page", defaultValue = "1") Integer page,
                                                        @RequestParam(value = "size", defaultValue = "5") Integer size) {
         return ResponseEntity.ok(commentService.filter(dto, page - 1, size));
     }
-
-
 
 
 }

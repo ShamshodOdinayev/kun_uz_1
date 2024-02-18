@@ -1,16 +1,17 @@
 package com.example.service;
 
-import com.example.dto.ArticleCreateDTO;
-import com.example.dto.ArticleDTO;
-import com.example.dto.ArticleShortInfoDTO;
-import com.example.dto.GetTheLastArticleNotListedDTO;
+import com.example.dto.*;
 import com.example.entity.ArticleEntity;
 import com.example.entity.ArticleNewsTypeEntity;
 import com.example.entity.RegionEntity;
 import com.example.enums.ArticleStatus;
 import com.example.exp.AppBadException;
+import com.example.repository.ArticleCustomRepository;
 import com.example.repository.ArticleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -25,6 +26,8 @@ public class ArticleService {
     private AttachService attachService;
     @Autowired
     private RegionService regionService;
+    @Autowired
+    private ArticleCustomRepository articleCustomRepository;
 
 
     public ArticleDTO create(ArticleCreateDTO dto, Integer profileId) {
@@ -168,9 +171,20 @@ public class ArticleService {
         List<ArticleShortInfoDTO> dtoList = new LinkedList<>();
         RegionEntity region = regionService.get(regionId);
         for (ArticleNewsTypeEntity articleNewsTypeEntity : articleByType) {
-            Optional<ArticleEntity> allByIdAndRegion = articleRepository.findAllByIdAndRegionAndVisible(articleNewsTypeEntity.getArticleId(), region,true);
+            Optional<ArticleEntity> allByIdAndRegion = articleRepository.findAllByIdAndRegionAndVisible(articleNewsTypeEntity.getArticleId(), region, true);
             allByIdAndRegion.ifPresent(entity -> dtoList.add(toShortInfoDTO(entity)));
         }
         return dtoList;
+    }
+
+    public PageImpl<ArticleShortInfoDTO> filter(ArticleFilterDTO dto, Integer page, Integer size) {
+        PaginationResultDTO<ArticleEntity> paginationResultDTO = articleCustomRepository.filter(dto, page, size);
+        List<ArticleEntity> articleEntityList = paginationResultDTO.getList();
+        List<ArticleShortInfoDTO> dtoList = new LinkedList<>();
+        for (ArticleEntity entity : articleEntityList) {
+            dtoList.add(toShortInfoDTO(entity));
+        }
+        Pageable pageable = PageRequest.of(page, size);
+        return new PageImpl<>(dtoList, pageable, paginationResultDTO.getTotalSize());
     }
 }

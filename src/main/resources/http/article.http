@@ -1,7 +1,7 @@
 ### Create
 POST localhost:8080/article/adm
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MDc3NTQ2MjIsImVtYWlsIjoiYWRtaW5AbWFpbC5ydSIsInJvbGUiOiJST0xFX0FETUlOIiwiZXhwIjoxNzA3ODQxMDIyLCJpc3MiOiJLdW5VelRlc3QifQ.9w3C7En9Nqpg3KDEaajhLP8FB2nedIUicL2lTtzbDmqPdD60QCQLUPhiTKsPYiP4qAL39tC548KGX19M75Nzag
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MDgyNjc1MjEsImVtYWlsIjoiYWRtaW5AbWFpbC5ydSIsInJvbGUiOiJST0xFX0FETUlOIiwiZXhwIjoxNzA4MzUzOTIxLCJpc3MiOiJLdW5VelRlc3QifQ.ngZOoajSifVueu_42pRqsVX-2beyaOPCxls83lRGW-gy46YbQKLq0n026JG-KRgDOeUnurpNDm0cTh7UwmAPHA
 
 {
   "title": "title12",
@@ -38,7 +38,8 @@ PUT localhost:8080/article/adm/changeStatus/50a8dc5b-7c12-4625-acfe-c9dfed62f237
 Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MDcyMjY2OTUsImlkIjoyLCJyb2xlIjoiTU9ERVJBVE9SIiwiZXhwIjoxNzA3MzEzMDk1LCJpc3MiOiJLdW5VelRlc3QifQ.asKVJjOZUKbl1ZauQlwVtLVo64z55AgfJUSb4k_CRgUYynQbjNdNBMN-BbbyuaDo6H59RYBDE9gIpcK79piu0g
 
 ### Get by type and size
-GET localhost:8080/article/getTypeId?typeId=1&size=2
+GET localhost:8080/article/getTypeId?typeId=1&size=90
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MDgyNjc1MjEsImVtYWlsIjoiYWRtaW5AbWFpbC5ydSIsInJvbGUiOiJST0xFX0FETUlOIiwiZXhwIjoxNzA4MzUzOTIxLCJpc3MiOiJLdW5VelRlc3QifQ.ngZOoajSifVueu_42pRqsVX-2beyaOPCxls83lRGW-gy46YbQKLq0n026JG-KRgDOeUnurpNDm0cTh7UwmAPHA
 
 ### Not Listed
 POST localhost:8080/article/notListed
@@ -62,4 +63,15 @@ GET localhost:8080/article/getMostRead?size=2
 
 ### Get article type and region
 GET localhost:8080/article/getTypeAndByRegion?typeId=2&regionId=2
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MDc3NTQ2MjIsImVtYWlsIjoiYWRtaW5AbWFpbC5ydSIsInJvbGUiOiJST0xFX0FETUlOIiwiZXhwIjoxNzA3ODQxMDIyLCJpc3MiOiJLdW5VelRlc3QifQ.9w3C7En9Nqpg3KDEaajhLP8FB2nedIUicL2lTtzbDmqPdD60QCQLUPhiTKsPYiP4qAL39tC548KGX19M75Nzag
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MDgyNjc1MjEsImVtYWlsIjoiYWRtaW5AbWFpbC5ydSIsInJvbGUiOiJST0xFX0FETUlOIiwiZXhwIjoxNzA4MzUzOTIxLCJpc3MiOiJLdW5VelRlc3QifQ.ngZOoajSifVueu_42pRqsVX-2beyaOPCxls83lRGW-gy46YbQKLq0n026JG-KRgDOeUnurpNDm0cTh7UwmAPHA
+
+### Filter
+POST localhost:8080/article/filter?page=1&size=2
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE3MDgyNjc1MjEsImVtYWlsIjoiYWRtaW5AbWFpbC5ydSIsInJvbGUiOiJST0xFX0FETUlOIiwiZXhwIjoxNzA4MzUzOTIxLCJpc3MiOiJLdW5VelRlc3QifQ.ngZOoajSifVueu_42pRqsVX-2beyaOPCxls83lRGW-gy46YbQKLq0n026JG-KRgDOeUnurpNDm0cTh7UwmAPHA
+
+{
+  "title": "title1",
+  "moderatorId": 2,
+  "fromDate": "2024-02-06"
+}
